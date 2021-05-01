@@ -12,6 +12,7 @@ namespace DecodeLabs\Deliverance\Channel;
 use DecodeLabs\Deliverance\Channel;
 use DecodeLabs\Deliverance\DataProvider;
 use DecodeLabs\Deliverance\DataProviderTrait;
+use DecodeLabs\Deliverance\DataReceiver;
 use DecodeLabs\Deliverance\DataReceiverTrait;
 
 class Buffer implements Channel
