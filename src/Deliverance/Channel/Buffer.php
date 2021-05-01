@@ -151,7 +151,7 @@ class Buffer implements Channel
     /**
      * Set as writable
      */
-    public function setWritable(bool $flag): Channel
+    public function setWritable(bool $flag): DataReceiver
     {
         $this->writable = $flag;
         return $this;

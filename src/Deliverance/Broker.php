@@ -30,6 +30,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Add provider on input endpoint
+     *
+     * @return $this
      */
     public function addInputProvider(DataProvider $provider): Broker
     {
@@ -50,6 +52,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Remove provider from input endpoint
+     *
+     * @return $this
      */
     public function removeInputProvider(DataProvider $provider): Broker
     {
@@ -83,6 +87,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Add receiver on output endpoint
+     *
+     * @return $this
      */
     public function addOutputReceiver(DataReceiver $receiver): Broker
     {
@@ -103,6 +109,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Remove receiver from output endpoint
+     *
+     * @return $this
      */
     public function removeOutputReceiver(DataReceiver $receiver): Broker
     {
@@ -136,6 +144,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Add receiver on error endpoint
+     *
+     * @return $this
      */
     public function addErrorReceiver(DataReceiver $receiver): Broker
     {
@@ -156,6 +166,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Remove receiver from error endpoint
+     *
+     * @return $this
      */
     public function removeErrorReceiver(DataReceiver $receiver): Broker
     {
@@ -190,6 +202,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Add channel to input and output endpoints
+     *
+     * @return $this
      */
     public function addIoChannel(Channel $channel): Broker
     {
@@ -203,6 +217,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Add channel to all endpoints
+     *
+     * @return $this
      */
     public function addChannel(Channel $channel): Broker
     {
@@ -230,6 +246,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Remove channel from all endpoints
+     *
+     * @return $this
      */
     public function removeChannel(Channel $channel): Broker
     {
@@ -243,6 +261,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Add data receiver for both output and error endpoints
+     *
+     * @return $this
      */
     public function addDataReceiver(DataReceiver $receiver): Broker
     {
@@ -268,6 +288,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Remove data receiver from all endpoints
+     *
+     * @return $this
      */
     public function removeDataReceiver(DataReceiver $receiver): Broker
     {
@@ -295,6 +317,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Set all input channels as blocking
+     *
+     * @return $this
      */
     public function setReadBlocking(bool $flag): DataProvider
     {
@@ -408,6 +432,8 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
 
     /**
      * Read all available data from input channels and pass to external channel
+     *
+     * @return $this
      */
     public function readTo(DataReceiver $writer): DataProvider
     {
