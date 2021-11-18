@@ -3,7 +3,7 @@
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/decodelabs/deliverance?style=flat-square)](https://packagist.org/packages/decodelabs/deliverance)
 [![Latest Version](https://img.shields.io/packagist/v/decodelabs/deliverance.svg?style=flat-square)](https://packagist.org/packages/decodelabs/deliverance)
 [![Total Downloads](https://img.shields.io/packagist/dt/decodelabs/deliverance.svg?style=flat-square)](https://packagist.org/packages/decodelabs/deliverance)
-[![Build Status](https://img.shields.io/travis/com/decodelabs/deliverance/main.svg?style=flat-square)](https://travis-ci.com/decodelabs/deliverance)
+[![Build Status](https://img.shields.io/travis/com/decodelabs/deliverance/main.svg?style=flat-square)](https://app.travis-ci.com/github/decodelabs/deliverance)
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-44CC11.svg?longCache=true&style=flat-square)](https://github.com/phpstan/phpstan)
 [![License](https://img.shields.io/packagist/l/decodelabs/deliverance?style=flat-square)](https://packagist.org/packages/decodelabs/deliverance)
 
