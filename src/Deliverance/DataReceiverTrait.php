@@ -45,6 +45,8 @@ trait DataReceiverTrait
 
     /**
      * Pluck and write $length bytes from buffer
+     *
+     * @param int<0, max> $length
      */
     public function writeBuffer(Buffer $buffer, int $length): int
     {
