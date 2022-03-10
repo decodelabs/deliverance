@@ -144,6 +144,8 @@ class Stream implements Channel
 
     /**
      * Read up to $length bytes from resource
+     *
+     * @param int<0, max> $length
      */
     public function read(int $length): ?string
     {
@@ -244,6 +246,8 @@ class Stream implements Channel
 
     /**
      * Write ?$length bytes to resource
+     *
+     * @param int<0, max>|null $length
      */
     public function write(?string $data, int $length = null): int
     {
