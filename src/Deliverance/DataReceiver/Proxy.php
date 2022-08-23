@@ -16,26 +16,21 @@ class Proxy implements DataReceiver
 {
     use DataReceiverTrait;
 
-    /**
-     * @var object
-     */
-    protected $receiver;
+    protected object $receiver;
 
     /**
      * @var callable
      */
     protected $writer;
-
-    /**
-     * @var bool
-     */
-    protected $writable = true;
+    protected bool $writable = true;
 
     /**
      * Init with stream path
      */
-    public function __construct(object $receiver, callable $writer)
-    {
+    public function __construct(
+        object $receiver,
+        callable $writer
+    ) {
         $this->receiver = $receiver;
         $this->writer = $writer;
     }
@@ -61,8 +56,10 @@ class Proxy implements DataReceiver
     /**
      * Write ?$length bytes to resource
      */
-    public function write(?string $data, int $length = null): int
-    {
+    public function write(
+        ?string $data,
+        int $length = null
+    ): int {
         $this->checkWritable();
 
         if ($data === null) {

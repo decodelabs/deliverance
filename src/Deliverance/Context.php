@@ -21,8 +21,10 @@ class Context
      *
      * @param Channel|string|resource $stream
      */
-    public function openStream($stream, string $mode = 'a+'): Channel
-    {
+    public function openStream(
+        $stream,
+        string $mode = 'a+'
+    ): Channel {
         if ($stream instanceof Channel) {
             return $stream;
         }

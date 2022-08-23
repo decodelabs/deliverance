@@ -48,8 +48,10 @@ trait DataReceiverTrait
      *
      * @param int<0, max> $length
      */
-    public function writeBuffer(Buffer $buffer, int $length): int
-    {
+    public function writeBuffer(
+        Buffer $buffer,
+        int $length
+    ): int {
         return $this->write($buffer->read($length), $length);
     }
 }

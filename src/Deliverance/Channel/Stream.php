@@ -27,28 +27,19 @@ class Stream implements Channel
      */
     protected $resource;
 
-    /**
-     * @var string|null
-     */
-    protected $mode = null;
-
-    /**
-     * @var bool|null
-     */
-    protected $readable = null;
-
-    /**
-     * @var bool|null
-     */
-    protected $writable = null;
+    protected ?string $mode = null;
+    protected ?bool $readable = null;
+    protected ?bool $writable = null;
 
     /**
      * Init with stream path
      *
      * @param string|resource $stream
      */
-    public function __construct($stream, ?string $mode = 'a+')
-    {
+    public function __construct(
+        $stream,
+        ?string $mode = 'a+'
+    ) {
         if (empty($stream)) {
             return;
         }
@@ -249,8 +240,10 @@ class Stream implements Channel
      *
      * @param int<0, max>|null $length
      */
-    public function write(?string $data, int $length = null): int
-    {
+    public function write(
+        ?string $data,
+        int $length = null
+    ): int {
         $this->checkWritable();
 
         if ($this->resource === null) {

@@ -9,7 +9,9 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance;
 
-interface Channel extends DataProvider, DataReceiver
+interface Channel extends
+    DataProvider,
+    DataReceiver
 {
     /**
      * @return resource|object|null

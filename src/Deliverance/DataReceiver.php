@@ -15,7 +15,15 @@ interface DataReceiver
 {
     public function isWritable(): bool;
 
-    public function write(?string $data, int $length = null): int;
+    public function write(
+        ?string $data,
+        int $length = null
+    ): int;
+
     public function writeLine(?string $data = ''): int;
-    public function writeBuffer(Buffer $buffer, int $length): int;
+
+    public function writeBuffer(
+        Buffer $buffer,
+        int $length
+    ): int;
 }

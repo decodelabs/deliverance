@@ -46,8 +46,10 @@ trait ErrorDataReceiverTrait
     /**
      * Pluck and write $length bytes from buffer
      */
-    public function writeErrorBuffer(Buffer $buffer, int $length): int
-    {
+    public function writeErrorBuffer(
+        Buffer $buffer,
+        int $length
+    ): int {
         return $this->writeError($buffer->read($length), $length);
     }
 }
