@@ -11,22 +11,25 @@ namespace DecodeLabs\Deliverance;
 
 use DecodeLabs\Deliverance\Channel\Buffer;
 
-class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
+class Broker implements
+    DataProvider,
+    DataReceiver,
+    ErrorDataReceiver
 {
     /**
      * @var array<int, DataProvider>
      */
-    protected $input = [];
+    protected array $input = [];
 
     /**
      * @var array<int, DataReceiver>
      */
-    protected $output = [];
+    protected array $output = [];
 
     /**
      * @var array<int, DataReceiver>
      */
-    protected $error = [];
+    protected array $error = [];
 
     /**
      * Add provider on input endpoint
@@ -468,9 +471,14 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
     /**
      * Write data, limit of $length, to output channels
      */
-    public function write(?string $data, int $length = null): int
-    {
-        if ($length === 0 || $data === null) {
+    public function write(
+        ?string $data,
+        int $length = null
+    ): int {
+        if (
+            $length === 0 ||
+            $data === null
+        ) {
             return 0;
         } elseif ($length === null) {
             $length = strlen($data);
@@ -481,7 +489,7 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
                 continue;
             }
 
-            for ($written = 0; $written < $length; $written += $result) {
+            for ($written = 0, $result = 0; $written < $length; $written += $result) {
                 $result = $receiver->write(substr($data, $written), $length - $written);
             }
         }
@@ -500,8 +508,10 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
     /**
      * Write buffer to output channels
      */
-    public function writeBuffer(Buffer $buffer, int $length): int
-    {
+    public function writeBuffer(
+        Buffer $buffer,
+        int $length
+    ): int {
         return $this->write($buffer->read($length), $length);
     }
 
@@ -523,8 +533,10 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
     /**
      * Write data, limit of $length, to error channels
      */
-    public function writeError(?string $data, int $length = null): int
-    {
+    public function writeError(
+        ?string $data,
+        int $length = null
+    ): int {
         if ($length === 0 || $data === null) {
             return 0;
         } elseif ($length === null) {
@@ -536,7 +548,7 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
                 continue;
             }
 
-            for ($written = 0; $written < $length; $written += $result) {
+            for ($written = 0, $result = 0; $written < $length; $written += $result) {
                 $result = $receiver->write(substr($data, $written), $length - $written);
             }
         }
@@ -555,8 +567,10 @@ class Broker implements DataProvider, DataReceiver, ErrorDataReceiver
     /**
      * Write buffer to error channels
      */
-    public function writeErrorBuffer(Buffer $buffer, int $length): int
-    {
+    public function writeErrorBuffer(
+        Buffer $buffer,
+        int $length
+    ): int {
         return $this->writeError($buffer->read($length), $length);
     }
 

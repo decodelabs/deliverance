@@ -15,7 +15,15 @@ interface ErrorDataReceiver
 {
     public function isErrorWritable(): bool;
 
-    public function writeError(?string $data, int $length = null): int;
+    public function writeError(
+        ?string $data,
+        int $length = null
+    ): int;
+
     public function writeErrorLine(?string $data = ''): int;
-    public function writeErrorBuffer(Buffer $buffer, int $length): int;
+
+    public function writeErrorBuffer(
+        Buffer $buffer,
+        int $length
+    ): int;
 }

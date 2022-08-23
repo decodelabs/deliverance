@@ -20,25 +20,10 @@ class Buffer implements Channel
     use DataProviderTrait;
     use DataReceiverTrait;
 
-    /**
-     * @var string
-     */
-    protected $buffer;
-
-    /**
-     * @var bool
-     */
-    protected $open = true;
-
-    /**
-     * @var bool
-     */
-    protected $readable = true;
-
-    /**
-     * @var bool
-     */
-    protected $writable = true;
+    protected string $buffer = '';
+    protected bool $open = true;
+    protected bool $readable = true;
+    protected bool $writable = true;
 
     /**
      * Init with stream path
@@ -169,8 +154,10 @@ class Buffer implements Channel
     /**
      * Write ?$length bytes to resource
      */
-    public function write(?string $data, int $length = null): int
-    {
+    public function write(
+        ?string $data,
+        int $length = null
+    ): int {
         $this->checkWritable();
 
         if ($data === null) {
