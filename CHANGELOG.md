@@ -1,3 +1,5 @@
+* Updated CI environment
+
 ## v0.2.2 (2022-08-24)
 * Switched fluid returns to static
 

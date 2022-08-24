@@ -7,6 +7,6 @@ namespace DecodeLabs;
 use DecodeLabs\Veneer\Proxy;
 use DecodeLabs\Veneer\ProxyTrait;
 use DecodeLabs\Deliverance\Context as Inst;
-class Deliverance implements Proxy { use ProxyTrait; 
+class Deliverance implements Proxy { use ProxyTrait;
 const VENEER = 'Deliverance';
 const VENEER_TARGET = Inst::class;};
