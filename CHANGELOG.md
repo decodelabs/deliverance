@@ -1,3 +1,6 @@
+## v0.2.2 (2022-08-24)
+* Switched fluid returns to static
+
 ## v0.2.1 (2022-08-23)
 * Added concrete types to all members
 
