@@ -38,8 +38,10 @@ class Proxy implements DataReceiver
 
     /**
      * Set as writable
+     *
+     * @return $this
      */
-    public function setWritable(bool $flag): DataReceiver
+    public function setWritable(bool $flag): static
     {
         $this->writable = $flag;
         return $this;

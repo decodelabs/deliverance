@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace DecodeLabs\Deliverance\Channel;
 
 use DecodeLabs\Deliverance\Channel;
-use DecodeLabs\Deliverance\DataProvider;
 use DecodeLabs\Deliverance\DataProviderTrait;
 use DecodeLabs\Deliverance\DataReceiverTrait;
 
@@ -85,7 +84,7 @@ class Stream implements Channel
     /**
      * Set read blocking mode
      */
-    public function setReadBlocking(bool $flag): DataProvider
+    public function setReadBlocking(bool $flag): static
     {
         if ($this->resource === null) {
             throw Exceptional::Logic(
@@ -282,7 +281,7 @@ class Stream implements Channel
     /**
      * Close the stream
      */
-    public function close(): Channel
+    public function close(): static
     {
         if ($this->resource !== null) {
             try {

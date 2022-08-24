@@ -10,9 +10,7 @@ declare(strict_types=1);
 namespace DecodeLabs\Deliverance\Channel;
 
 use DecodeLabs\Deliverance\Channel;
-use DecodeLabs\Deliverance\DataProvider;
 use DecodeLabs\Deliverance\DataProviderTrait;
-use DecodeLabs\Deliverance\DataReceiver;
 use DecodeLabs\Deliverance\DataReceiverTrait;
 
 class Buffer implements Channel
@@ -45,7 +43,7 @@ class Buffer implements Channel
     /**
      * Set read blocking mode
      */
-    public function setReadBlocking(bool $flag): DataProvider
+    public function setReadBlocking(bool $flag): static
     {
         return $this;
     }
@@ -136,8 +134,10 @@ class Buffer implements Channel
 
     /**
      * Set as writable
+     *
+     * @return $this
      */
-    public function setWritable(bool $flag): DataReceiver
+    public function setWritable(bool $flag): static
     {
         $this->writable = $flag;
         return $this;
@@ -148,7 +148,9 @@ class Buffer implements Channel
      */
     public function isWritable(): bool
     {
-        return $this->open && $this->writable;
+        return
+            $this->open &&
+            $this->writable;
     }
 
     /**
@@ -183,7 +185,7 @@ class Buffer implements Channel
     /**
      * Close the stream
      */
-    public function close(): Channel
+    public function close(): static
     {
         $this->open = false;
         return $this;
