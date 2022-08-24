@@ -21,5 +21,5 @@ interface Channel extends
     /**
      * @return $this
      */
-    public function close(): Channel;
+    public function close(): static;
 }

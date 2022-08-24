@@ -14,7 +14,7 @@ interface DataProvider
     /**
      * @return $this
      */
-    public function setReadBlocking(bool $flag): DataProvider;
+    public function setReadBlocking(bool $flag): static;
 
     public function isReadBlocking(): bool;
     public function isReadable(): bool;
@@ -27,7 +27,7 @@ interface DataProvider
     /**
      * @return $this
      */
-    public function readTo(DataReceiver $writer): DataProvider;
+    public function readTo(DataReceiver $writer): static;
 
     public function isAtEnd(): bool;
 }

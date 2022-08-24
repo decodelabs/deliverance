@@ -36,7 +36,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function addInputProvider(DataProvider $provider): Broker
+    public function addInputProvider(DataProvider $provider): static
     {
         $id = spl_object_id($provider);
         $this->input[$id] = $provider;
@@ -58,7 +58,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function removeInputProvider(DataProvider $provider): Broker
+    public function removeInputProvider(DataProvider $provider): static
     {
         $id = spl_object_id($provider);
         unset($this->input[$id]);
@@ -93,7 +93,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function addOutputReceiver(DataReceiver $receiver): Broker
+    public function addOutputReceiver(DataReceiver $receiver): static
     {
         $id = spl_object_id($receiver);
         $this->output[$id] = $receiver;
@@ -115,7 +115,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function removeOutputReceiver(DataReceiver $receiver): Broker
+    public function removeOutputReceiver(DataReceiver $receiver): static
     {
         $id = spl_object_id($receiver);
         unset($this->output[$id]);
@@ -150,7 +150,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function addErrorReceiver(DataReceiver $receiver): Broker
+    public function addErrorReceiver(DataReceiver $receiver): static
     {
         $id = spl_object_id($receiver);
         $this->error[$id] = $receiver;
@@ -172,7 +172,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function removeErrorReceiver(DataReceiver $receiver): Broker
+    public function removeErrorReceiver(DataReceiver $receiver): static
     {
         $id = spl_object_id($receiver);
         unset($this->error[$id]);
@@ -208,7 +208,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function addIoChannel(Channel $channel): Broker
+    public function addIoChannel(Channel $channel): static
     {
         $id = spl_object_id($channel);
 
@@ -223,7 +223,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function addChannel(Channel $channel): Broker
+    public function addChannel(Channel $channel): static
     {
         $id = spl_object_id($channel);
 
@@ -252,7 +252,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function removeChannel(Channel $channel): Broker
+    public function removeChannel(Channel $channel): static
     {
         $id = spl_object_id($channel);
         unset($this->input[$id]);
@@ -267,7 +267,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function addDataReceiver(DataReceiver $receiver): Broker
+    public function addDataReceiver(DataReceiver $receiver): static
     {
         $id = spl_object_id($receiver);
 
@@ -294,7 +294,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function removeDataReceiver(DataReceiver $receiver): Broker
+    public function removeDataReceiver(DataReceiver $receiver): static
     {
         $id = spl_object_id($receiver);
 
@@ -323,7 +323,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function setReadBlocking(bool $flag): DataProvider
+    public function setReadBlocking(bool $flag): static
     {
         foreach ($this->input as $provider) {
             $provider->setReadBlocking($flag);
@@ -438,7 +438,7 @@ class Broker implements
      *
      * @return $this
      */
-    public function readTo(DataReceiver $writer): DataProvider
+    public function readTo(DataReceiver $writer): static
     {
         while (!$this->isAtEnd()) {
             $chunk = $this->read(8192);

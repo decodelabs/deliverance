@@ -16,7 +16,7 @@ trait DataProviderTrait
     /**
      * Set read blocking mode
      */
-    public function setReadBlocking(bool $flag): DataProvider
+    public function setReadBlocking(bool $flag): static
     {
         if ($flag) {
             throw Exceptional::Runtime(
@@ -82,7 +82,7 @@ trait DataProviderTrait
     /**
      * Transfer available data to a write instance
      */
-    public function readTo(DataReceiver $writer): DataProvider
+    public function readTo(DataReceiver $writer): static
     {
         $this->checkReadable();
 
