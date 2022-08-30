@@ -9,15 +9,15 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance;
 
-interface DataProvider
+use DecodeLabs\Tightrope\Readable;
+
+interface DataProvider extends Readable
 {
     /**
      * @return $this
      */
     public function setReadBlocking(bool $flag): static;
-
     public function isReadBlocking(): bool;
-    public function isReadable(): bool;
 
     public function read(int $length): ?string;
     public function readAll(): ?string;

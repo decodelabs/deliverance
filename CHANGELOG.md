@@ -1,3 +1,7 @@
+## v0.2.3 (2022-08-30)
+* Use Tightrope Readable and Writable interfaces in DataProvider and DataReceiver
+* Updated CI environment
+
 ## v0.2.2 (2022-08-24)
 * Switched fluid returns to static
 
