@@ -10,11 +10,10 @@ declare(strict_types=1);
 namespace DecodeLabs\Deliverance;
 
 use DecodeLabs\Deliverance\Channel\Buffer;
+use DecodeLabs\Tightrope\Writable;
 
-interface DataReceiver
+interface DataReceiver extends Writable
 {
-    public function isWritable(): bool;
-
     public function write(
         ?string $data,
         int $length = null
