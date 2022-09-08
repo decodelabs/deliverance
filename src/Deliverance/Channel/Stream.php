@@ -146,7 +146,7 @@ class Stream implements Channel
         }
 
         try {
-            $output = fread($this->resource, $length);
+            $output = $this->fread($length);
         } catch (Throwable $e) {
             return null;
         }
@@ -156,6 +156,18 @@ class Stream implements Channel
         }
 
         return $output;
+    }
+
+    /**
+     * @param int<0, max> $length
+     */
+    protected function fread(int $length): string|false
+    {
+        if ($this->resource === null) {
+            return false;
+        }
+
+        return fread($this->resource, $length);
     }
 
     /**
@@ -170,7 +182,7 @@ class Stream implements Channel
         }
 
         try {
-            $output = fgetc($this->resource);
+            $output = $this->fgetc();
         } catch (Throwable $e) {
             return null;
         }
@@ -180,6 +192,15 @@ class Stream implements Channel
         }
 
         return $output;
+    }
+
+    protected function fgetc(): string|false
+    {
+        if ($this->resource === null) {
+            return false;
+        }
+
+        return fgetc($this->resource);
     }
 
     /**
@@ -194,7 +215,7 @@ class Stream implements Channel
         }
 
         try {
-            $output = fgets($this->resource);
+            $output = $this->fgets();
         } catch (Throwable $e) {
             return null;
         }
@@ -206,6 +227,18 @@ class Stream implements Channel
         }
 
         return $output;
+    }
+
+    /**
+     * @param int<0, max>|null $length
+     */
+    protected function fgets(?int $length = null): string|false
+    {
+        if ($this->resource === null) {
+            return false;
+        }
+
+        return fgets($this->resource, $length);
     }
 
     /**
@@ -249,11 +282,7 @@ class Stream implements Channel
             return 0;
         }
 
-        if ($length !== null) {
-            $output = fwrite($this->resource, (string)$data, $length);
-        } else {
-            $output = fwrite($this->resource, (string)$data);
-        }
+        $output = $this->fwrite((string)$data, $length);
 
         if ($output === false) {
             throw Exceptional::Io(
@@ -267,9 +296,32 @@ class Stream implements Channel
     }
 
     /**
+     * @param int<0, max>|null $length
+     */
+    protected function fwrite(
+        string $data,
+        ?int $length = null
+    ): int|false {
+        if ($this->resource === null) {
+            return false;
+        }
+
+        return fwrite($this->resource, $data, $length);
+    }
+
+    /**
      * Has this stream ended?
      */
     public function isAtEnd(): bool
+    {
+        if ($this->resource === null) {
+            return true;
+        }
+
+        return $this->feof();
+    }
+
+    protected function feof(): bool
     {
         if ($this->resource === null) {
             return true;
@@ -285,7 +337,7 @@ class Stream implements Channel
     {
         if ($this->resource !== null) {
             try {
-                fclose($this->resource);
+                $this->fclose();
             } catch (Throwable $e) {
             }
         }
@@ -296,5 +348,14 @@ class Stream implements Channel
         $this->writable = null;
 
         return $this;
+    }
+
+    protected function fclose(): bool
+    {
+        if ($this->resource === null) {
+            return false;
+        }
+
+        return fclose($this->resource);
     }
 }
