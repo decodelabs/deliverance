@@ -1,3 +1,6 @@
+## v0.2.4 (2022-09-08)
+* Wrapped f* functions for easy overriding
+
 ## v0.2.3 (2022-08-30)
 * Use Tightrope Readable and Writable interfaces in DataProvider and DataReceiver
 * Updated CI environment
