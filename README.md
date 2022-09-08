@@ -52,7 +52,7 @@ Channels can be grouped together and managed by an <code>IO Broker</code> -
 use DecodeLabs\Deliverance;
 
 // Create a CLI IO handler
-$broker = new Deliverance::newBroker()
+$broker = Deliverance::newBroker()
     ->addInputProvider(Deliverance::openStream(STDIN))
     ->addOutputReceiver(Deliverance::openStream(STDOUT))
     ->addErrorReceiver(Deliverance::openStream(STDERR));
