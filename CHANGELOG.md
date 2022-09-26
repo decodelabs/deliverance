@@ -1,3 +1,6 @@
+## v0.2.5 (2022-09-27)
+* Updated Veneer dependency
+
 ## v0.2.4 (2022-09-08)
 * Wrapped f* functions for easy overriding
 
