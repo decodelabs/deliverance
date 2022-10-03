@@ -20,6 +20,7 @@ class Broker implements
      * @var array<int, DataProvider>
      */
     protected array $input = [];
+    protected bool $inputEnabled = true;
 
     /**
      * @var array<int, DataReceiver>
@@ -86,6 +87,26 @@ class Broker implements
 
         return null;
     }
+
+    /**
+     * Set input enabled
+     *
+     * @return $this
+     */
+    public function setInputEnabled(bool $enabled): static
+    {
+        $this->inputEnabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * Is input enabled
+     */
+    public function isInputEnabled(): bool
+    {
+        return $this->inputEnabled;
+    }
+
 
 
     /**
@@ -352,6 +373,10 @@ class Broker implements
      */
     public function isReadable(): bool
     {
+        if (!$this->inputEnabled) {
+            return false;
+        }
+
         foreach ($this->input as $provider) {
             if ($provider->isReadable()) {
                 return true;
@@ -366,6 +391,10 @@ class Broker implements
      */
     public function read(int $length): ?string
     {
+        if (!$this->inputEnabled) {
+            return null;
+        }
+
         foreach ($this->input as $provider) {
             if (!$provider->isReadable()) {
                 continue;
@@ -384,6 +413,10 @@ class Broker implements
      */
     public function readAll(): ?string
     {
+        if (!$this->inputEnabled) {
+            return null;
+        }
+
         foreach ($this->input as $provider) {
             if (!$provider->isReadable()) {
                 continue;
@@ -402,6 +435,10 @@ class Broker implements
      */
     public function readChar(): ?string
     {
+        if (!$this->inputEnabled) {
+            return null;
+        }
+
         foreach ($this->input as $provider) {
             if (!$provider->isReadable()) {
                 continue;
@@ -420,6 +457,10 @@ class Broker implements
      */
     public function readLine(): ?string
     {
+        if (!$this->inputEnabled) {
+            return null;
+        }
+
         foreach ($this->input as $provider) {
             if (!$provider->isReadable()) {
                 continue;
