@@ -1,3 +1,6 @@
+## v0.2.7 (2022-10-03)
+* Added inputEnabled flag to Broker
+
 ## v0.2.6 (2022-09-27)
 * Updated Veneer stub
 * Updated composer check script
