@@ -7,7 +7,13 @@
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-44CC11.svg?longCache=true&style=flat)](https://github.com/phpstan/phpstan)
 [![License](https://img.shields.io/packagist/l/decodelabs/deliverance?style=flat)](https://packagist.org/packages/decodelabs/deliverance)
 
-Shared data transfer interfaces for PHP
+### Shared data transfer interfaces for PHP
+
+Deliverance is a middleware library intended to be used by other framework systems that need to manage multiplex IO operations.
+
+_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
+
+---
 
 ## Installation
 
