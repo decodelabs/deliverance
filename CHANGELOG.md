@@ -1,3 +1,5 @@
+* Fixed PHP8.1 testing
+
 ## v0.2.7 (2022-10-03)
 * Added inputEnabled flag to Broker
 
