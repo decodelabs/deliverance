@@ -35,7 +35,7 @@ class Context
     /**
      * Open a STDIN Channel
      */
-    public function openCliInputStream(): Channel
+    public function openCliInputStream(): Stream
     {
         if (!defined('STDIN')) {
             throw Exceptional::Runtime(
@@ -49,7 +49,7 @@ class Context
     /**
      * Open a STDOUT Channel
      */
-    public function openCliOutputStream(): Channel
+    public function openCliOutputStream(): Stream
     {
         if (!defined('STDOUT')) {
             throw Exceptional::Runtime(
@@ -63,7 +63,7 @@ class Context
     /**
      * Open a STDERR Channel
      */
-    public function openCliErrorStream(): Channel
+    public function openCliErrorStream(): Stream
     {
         if (!defined('STDERR')) {
             throw Exceptional::Runtime(
@@ -78,7 +78,7 @@ class Context
     /**
      * Open HTTP input Channel
      */
-    public function openHttpInputStream(): Channel
+    public function openHttpInputStream(): Stream
     {
         return new Stream('php://input', 'r');
     }
@@ -86,7 +86,7 @@ class Context
     /**
      * Open HTTP output Channel
      */
-    public function openHttpOutputStream(): Channel
+    public function openHttpOutputStream(): Stream
     {
         return new Stream('php://output', 'w');
     }
