@@ -1,3 +1,8 @@
+## v0.2.7 (2022-11-30)
+* Use specific return types in Context
+* Migrated to use effigy in CI workflow
+* Fixed PHP8.1 testing
+
 ## v0.2.7 (2022-10-03)
 * Added inputEnabled flag to Broker
 
