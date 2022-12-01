@@ -1,3 +1,4 @@
+## v0.2.9 (2022-12-01)
 * Split Broker into constituent part traits
 
 ## v0.2.8 (2022-11-30)
