@@ -1,4 +1,7 @@
-## v0.2.7 (2022-11-30)
+## v0.2.9 (2022-12-01)
+* Split Broker into constituent part traits
+
+## v0.2.8 (2022-11-30)
 * Use specific return types in Context
 * Migrated to use effigy in CI workflow
 * Fixed PHP8.1 testing
