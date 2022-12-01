@@ -9,84 +9,21 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance;
 
+use DecodeLabs\Deliverance\Broker\Connector;
+use DecodeLabs\Deliverance\Broker\ConnectorTrait;
 use DecodeLabs\Deliverance\Channel\Buffer;
 
 class Broker implements
     DataProvider,
     DataReceiver,
-    ErrorDataReceiver
+    Connector
 {
-    /**
-     * @var array<int, DataProvider>
-     */
-    protected array $input = [];
+    use ConnectorTrait;
+
+
     protected bool $inputEnabled = true;
 
-    /**
-     * @var array<int, DataReceiver>
-     */
-    protected array $output = [];
 
-    /**
-     * @var array<int, DataReceiver>
-     */
-    protected array $error = [];
-
-    /**
-     * Add provider on input endpoint
-     *
-     * @return $this
-     */
-    public function addInputProvider(DataProvider $provider): static
-    {
-        $id = spl_object_id($provider);
-        $this->input[$id] = $provider;
-
-        return $this;
-    }
-
-    /**
-     * Is provider registered on input endpoint?
-     */
-    public function hasInputProvider(DataProvider $provider): bool
-    {
-        $id = spl_object_id($provider);
-        return isset($this->input[$id]);
-    }
-
-    /**
-     * Remove provider from input endpoint
-     *
-     * @return $this
-     */
-    public function removeInputProvider(DataProvider $provider): static
-    {
-        $id = spl_object_id($provider);
-        unset($this->input[$id]);
-        return $this;
-    }
-
-    /**
-     * Get list of input providers
-     *
-     * @return array<int, DataProvider>
-     */
-    public function getInputProviders(): array
-    {
-        return $this->input;
-    }
-
-    /**
-     * Get first input provider
-     */
-    public function getFirstInputProvider(): ?DataProvider
-    {
-        foreach ($this->input as $provider) {
-            return $provider;
-        }
-
-        return null;
-    }
 
     /**
      * Set input enabled
@@ -109,119 +46,6 @@ class Broker implements
 
 
 
-    /**
-     * Add receiver on output endpoint
-     *
-     * @return $this
-     */
-    public function addOutputReceiver(DataReceiver $receiver): static
-    {
-        $id = spl_object_id($receiver);
-        $this->output[$id] = $receiver;
-
-        return $this;
-    }
-
-    /**
-     * Is receiver registered on input endpoint?
-     */
-    public function hasOutputReceiver(DataReceiver $receiver): bool
-    {
-        $id = spl_object_id($receiver);
-        return isset($this->output[$id]);
-    }
-
-    /**
-     * Remove receiver from output endpoint
-     *
-     * @return $this
-     */
-    public function removeOutputReceiver(DataReceiver $receiver): static
-    {
-        $id = spl_object_id($receiver);
-        unset($this->output[$id]);
-        return $this;
-    }
-
-    /**
-     * Get list of output receivers
-     *
-     * @return array<int, DataReceiver>
-     */
-    public function getOutputReceivers(): array
-    {
-        return $this->output;
-    }
-
-    /**
-     * Get first output receiver
-     */
-    public function getFirstOutputReceiver(): ?DataReceiver
-    {
-        foreach ($this->output as $receiver) {
-            return $receiver;
-        }
-
-        return null;
-    }
-
-
-    /**
-     * Add receiver on error endpoint
-     *
-     * @return $this
-     */
-    public function addErrorReceiver(DataReceiver $receiver): static
-    {
-        $id = spl_object_id($receiver);
-        $this->error[$id] = $receiver;
-
-        return $this;
-    }
-
-    /**
-     * Is receiver registered at error endpoint?
-     */
-    public function hasErrorReceiver(DataReceiver $receiver): bool
-    {
-        $id = spl_object_id($receiver);
-        return isset($this->error[$id]);
-    }
-
-    /**
-     * Remove receiver from error endpoint
-     *
-     * @return $this
-     */
-    public function removeErrorReceiver(DataReceiver $receiver): static
-    {
-        $id = spl_object_id($receiver);
-        unset($this->error[$id]);
-        return $this;
-    }
-
-    /**
-     * Get list of error receivers
-     *
-     * @return array<int, DataReceiver>
-     */
-    public function getErrorReceivers(): array
-    {
-        return $this->error;
-    }
-
-    /**
-     * Get first error receiver
-     */
-    public function getFirstErrorReceiver(): ?DataReceiver
-    {
-        foreach ($this->error as $receiver) {
-            return $receiver;
-        }
-
-        return null;
-    }
-
 
 
     /**
@@ -233,8 +57,8 @@ class Broker implements
     {
         $id = spl_object_id($channel);
 
-        $this->input[$id] = $channel;
-        $this->output[$id] = $channel;
+        $this->inputCollectors[$id] = $channel;
+        $this->outputReceivers[$id] = $channel;
 
         return $this;
     }
@@ -248,9 +72,9 @@ class Broker implements
     {
         $id = spl_object_id($channel);
 
-        $this->input[$id] = $channel;
-        $this->output[$id] = $channel;
-        $this->error[$id] = $channel;
+        $this->inputCollectors[$id] = $channel;
+        $this->outputReceivers[$id] = $channel;
+        $this->errorReceivers[$id] = $channel;
 
         return $this;
     }
@@ -263,9 +87,9 @@ class Broker implements
         $id = spl_object_id($channel);
 
         return
-            isset($this->input[$id]) ||
-            isset($this->output[$id]) ||
-            isset($this->error[$id]);
+            isset($this->inputCollectors[$id]) ||
+            isset($this->outputReceivers[$id]) ||
+            isset($this->errorReceivers[$id]);
     }
 
     /**
@@ -276,52 +100,9 @@ class Broker implements
     public function removeChannel(Channel $channel): static
     {
         $id = spl_object_id($channel);
-        unset($this->input[$id]);
-        unset($this->output[$id]);
-        unset($this->error[$id]);
-        return $this;
-    }
-
-
-    /**
-     * Add data receiver for both output and error endpoints
-     *
-     * @return $this
-     */
-    public function addDataReceiver(DataReceiver $receiver): static
-    {
-        $id = spl_object_id($receiver);
-
-        $this->output[$id] = $receiver;
-        $this->error[$id] = $receiver;
-
-        return $this;
-    }
-
-    /**
-     * Is receiver in any endpoint
-     */
-    public function hasDataReceiver(DataReceiver $receiver): bool
-    {
-        $id = spl_object_id($receiver);
-
-        return
-            isset($this->output[$id]) ||
-            isset($this->error[$id]);
-    }
-
-    /**
-     * Remove data receiver from all endpoints
-     *
-     * @return $this
-     */
-    public function removeDataReceiver(DataReceiver $receiver): static
-    {
-        $id = spl_object_id($receiver);
-
-        unset($this->output[$id]);
-        unset($this->error[$id]);
-
+        unset($this->inputCollectors[$id]);
+        unset($this->outputReceivers[$id]);
+        unset($this->errorReceivers[$id]);
         return $this;
     }
 
@@ -346,7 +127,7 @@ class Broker implements
      */
     public function setReadBlocking(bool $flag): static
     {
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             $provider->setReadBlocking($flag);
         }
 
@@ -358,7 +139,7 @@ class Broker implements
      */
     public function isReadBlocking(): bool
     {
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             if ($provider->isReadBlocking()) {
                 return true;
             }
@@ -377,7 +158,7 @@ class Broker implements
             return false;
         }
 
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             if ($provider->isReadable()) {
                 return true;
             }
@@ -395,7 +176,7 @@ class Broker implements
             return null;
         }
 
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             if (!$provider->isReadable()) {
                 continue;
             }
@@ -417,7 +198,7 @@ class Broker implements
             return null;
         }
 
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             if (!$provider->isReadable()) {
                 continue;
             }
@@ -439,7 +220,7 @@ class Broker implements
             return null;
         }
 
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             if (!$provider->isReadable()) {
                 continue;
             }
@@ -461,7 +242,7 @@ class Broker implements
             return null;
         }
 
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             if (!$provider->isReadable()) {
                 continue;
             }
@@ -500,7 +281,7 @@ class Broker implements
      */
     public function isWritable(): bool
     {
-        foreach ($this->output as $receiver) {
+        foreach ($this->outputReceivers as $receiver) {
             if ($receiver->isWritable()) {
                 return true;
             }
@@ -525,7 +306,7 @@ class Broker implements
             $length = strlen($data);
         }
 
-        foreach ($this->output as $receiver) {
+        foreach ($this->outputReceivers as $receiver) {
             if (!$receiver->isWritable()) {
                 continue;
             }
@@ -562,7 +343,7 @@ class Broker implements
      */
     public function isErrorWritable(): bool
     {
-        foreach ($this->error as $receiver) {
+        foreach ($this->errorReceivers as $receiver) {
             if ($receiver->isWritable()) {
                 return true;
             }
@@ -584,7 +365,7 @@ class Broker implements
             $length = strlen($data);
         }
 
-        foreach ($this->error as $receiver) {
+        foreach ($this->errorReceivers as $receiver) {
             if (!$receiver->isWritable()) {
                 continue;
             }
@@ -621,7 +402,7 @@ class Broker implements
      */
     public function isAtEnd(): bool
     {
-        foreach ($this->input as $provider) {
+        foreach ($this->inputCollectors as $provider) {
             if (!$provider->isAtEnd()) {
                 return false;
             }
