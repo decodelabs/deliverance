@@ -17,7 +17,7 @@ class Deliverance implements Proxy
 {
     use ProxyTrait;
 
-    const VENEER = 'DecodeLabs\Deliverance';
+    const VENEER = 'DecodeLabs\\Deliverance';
     const VENEER_TARGET = Inst::class;
 
     public static Inst $instance;
