@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "DecodeLabs\\Deliverance\\": "src/"
+            "DecodeLabs\\": "src/"
         }
     },
     "extra": {

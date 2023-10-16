@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace DecodeLabs\Deliverance;
+namespace DecodeLabs;
 
 use DecodeLabs\Deliverance\Channel\Buffer;
 use DecodeLabs\Deliverance\Channel\Stream;
 use DecodeLabs\Exceptional;
 
-class Context
+class Deliverance
 {
     /**
      * Open a stream Channel
