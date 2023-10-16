@@ -25,13 +25,6 @@ composer require decodelabs/deliverance
 
 ## Usage
 
-### Importing
-
-Deliverance uses [Veneer](https://github.com/decodelabs/veneer) to provide a unified frontage under <code>DecodeLabs\Deliverance</code>.
-You can access all the primary functionality via this static frontage without compromising testing and dependency injection.
-
-
-
 ### Channels
 
 Channels represent simple in / out handlers and can be written to and read from:
@@ -42,7 +35,7 @@ use DecodeLabs\Deliverance;
 $stream = Deliverance::openStream('path/to/file');
 $stream->writeLine('Hello world');
 
-$stream = Deliverance::openCliOutputStream(); // Same as Deliverance::openStream(STDOUT);
+$stream = Deliverance::openCliOutputStream(); // Same as new Deliverance\Channel\Stream(STDOUT);
 
 $buffer = Deliverance::newBuffer();
 $buffer->write('Some text to buffer');
