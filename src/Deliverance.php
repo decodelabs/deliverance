@@ -7,21 +7,21 @@
 
 declare(strict_types=1);
 
-namespace DecodeLabs\Deliverance;
+namespace DecodeLabs;
 
+use DecodeLabs\Deliverance\Broker;
+use DecodeLabs\Deliverance\Channel;
 use DecodeLabs\Deliverance\Channel\Buffer;
 use DecodeLabs\Deliverance\Channel\Stream;
 
-use DecodeLabs\Exceptional;
-
-class Context
+class Deliverance
 {
     /**
      * Open a stream Channel
      *
      * @param Channel|string|resource $stream
      */
-    public function openStream(
+    public static function openStream(
         $stream,
         string $mode = 'a+'
     ): Channel {
@@ -35,7 +35,7 @@ class Context
     /**
      * Open a STDIN Channel
      */
-    public function openCliInputStream(): Stream
+    public static function openCliInputStream(): Stream
     {
         if (!defined('STDIN')) {
             throw Exceptional::Runtime(
@@ -49,7 +49,7 @@ class Context
     /**
      * Open a STDOUT Channel
      */
-    public function openCliOutputStream(): Stream
+    public static function openCliOutputStream(): Stream
     {
         if (!defined('STDOUT')) {
             throw Exceptional::Runtime(
@@ -63,7 +63,7 @@ class Context
     /**
      * Open a STDERR Channel
      */
-    public function openCliErrorStream(): Stream
+    public static function openCliErrorStream(): Stream
     {
         if (!defined('STDERR')) {
             throw Exceptional::Runtime(
@@ -78,7 +78,7 @@ class Context
     /**
      * Open HTTP input Channel
      */
-    public function openHttpInputStream(): Stream
+    public static function openHttpInputStream(): Stream
     {
         return new Stream('php://input', 'r');
     }
@@ -86,7 +86,7 @@ class Context
     /**
      * Open HTTP output Channel
      */
-    public function openHttpOutputStream(): Stream
+    public static function openHttpOutputStream(): Stream
     {
         return new Stream('php://output', 'w');
     }
@@ -96,8 +96,9 @@ class Context
     /**
      * Create a new buffer Channel
      */
-    public function newBuffer(?string $buffer = null): Buffer
-    {
+    public static function newBuffer(
+        ?string $buffer = null
+    ): Buffer {
         return new Buffer($buffer);
     }
 
@@ -105,7 +106,7 @@ class Context
     /**
      * New IO Broker
      */
-    public function newBroker(): Broker
+    public static function newBroker(): Broker
     {
         return new Broker();
     }
@@ -113,21 +114,21 @@ class Context
     /**
      * Create STD IO Broker
      */
-    public function newCliBroker(): Broker
+    public static function newCliBroker(): Broker
     {
-        return $this->newBroker()
-            ->addInputProvider($this->openCliInputStream())
-            ->addOutputReceiver($this->openCliOutputStream())
-            ->addErrorReceiver($this->openCliErrorStream());
+        return static::newBroker()
+            ->addInputProvider(static::openCliInputStream())
+            ->addOutputReceiver(static::openCliOutputStream())
+            ->addErrorReceiver(static::openCliErrorStream());
     }
 
     /**
      * Create HTTP IO Broker
      */
-    public function newHttpBroker(): Broker
+    public static function newHttpBroker(): Broker
     {
-        return $this->newBroker()
-            ->addInputProvider($this->openHttpInputStream())
-            ->addOutputReceiver($this->openHttpOutputStream());
+        return static::newBroker()
+            ->addInputProvider(static::openHttpInputStream())
+            ->addOutputReceiver(static::openHttpOutputStream());
     }
 }

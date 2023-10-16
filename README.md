@@ -3,7 +3,7 @@
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/decodelabs/deliverance?style=flat)](https://packagist.org/packages/decodelabs/deliverance)
 [![Latest Version](https://img.shields.io/packagist/v/decodelabs/deliverance.svg?style=flat)](https://packagist.org/packages/decodelabs/deliverance)
 [![Total Downloads](https://img.shields.io/packagist/dt/decodelabs/deliverance.svg?style=flat)](https://packagist.org/packages/decodelabs/deliverance)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/decodelabs/deliverance/Integrate)](https://github.com/decodelabs/deliverance/actions/workflows/integrate.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/decodelabs/deliverance/integrate.yml?branch=develop)](https://github.com/decodelabs/deliverance/actions/workflows/integrate.yml)
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-44CC11.svg?longCache=true&style=flat)](https://github.com/phpstan/phpstan)
 [![License](https://img.shields.io/packagist/l/decodelabs/deliverance?style=flat)](https://packagist.org/packages/decodelabs/deliverance)
 
@@ -25,13 +25,6 @@ composer require decodelabs/deliverance
 
 ## Usage
 
-### Importing
-
-Deliverance uses [Veneer](https://github.com/decodelabs/veneer) to provide a unified frontage under <code>DecodeLabs\Deliverance</code>.
-You can access all the primary functionality via this static frontage without compromising testing and dependency injection.
-
-
-
 ### Channels
 
 Channels represent simple in / out handlers and can be written to and read from:
@@ -42,7 +35,7 @@ use DecodeLabs\Deliverance;
 $stream = Deliverance::openStream('path/to/file');
 $stream->writeLine('Hello world');
 
-$stream = Deliverance::openCliOutputStream(); // Same as Deliverance::openStream(STDOUT);
+$stream = Deliverance::openCliOutputStream(); // Same as new Deliverance\Channel\Stream(STDOUT);
 
 $buffer = Deliverance::newBuffer();
 $buffer->write('Some text to buffer');
