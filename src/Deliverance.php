@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace DecodeLabs;
 
+use DecodeLabs\Deliverance\Broker;
+use DecodeLabs\Deliverance\Channel;
 use DecodeLabs\Deliverance\Channel\Buffer;
 use DecodeLabs\Deliverance\Channel\Stream;
 use DecodeLabs\Exceptional;
