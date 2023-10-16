@@ -1,3 +1,5 @@
+* Updated HTTP Message dependency
+
 ## v0.2.10 (2023-10-16)
 * Removed Veneer dependency
 
