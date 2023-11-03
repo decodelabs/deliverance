@@ -84,8 +84,9 @@ class Stream implements Channel
     /**
      * Set read blocking mode
      */
-    public function setReadBlocking(bool $flag): static
-    {
+    public function setReadBlocking(
+        bool $flag
+    ): static {
         if ($this->resource === null) {
             throw Exceptional::Logic(
                 'Cannot set blocking, resource not open'
@@ -137,8 +138,9 @@ class Stream implements Channel
      *
      * @param int<0, max> $length
      */
-    public function read(int $length): ?string
-    {
+    public function read(
+        int $length
+    ): ?string {
         $this->checkReadable();
 
         if ($this->resource === null) {
@@ -161,8 +163,9 @@ class Stream implements Channel
     /**
      * @param int<0, max> $length
      */
-    protected function fread(int $length): string|false
-    {
+    protected function fread(
+        int $length
+    ): string|false {
         if ($this->resource === null) {
             return false;
         }
@@ -232,8 +235,9 @@ class Stream implements Channel
     /**
      * @param int<0, max>|null $length
      */
-    protected function fgets(?int $length = null): string|false
-    {
+    protected function fgets(
+        ?int $length = null
+    ): string|false {
         if ($this->resource === null) {
             return false;
         }

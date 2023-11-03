@@ -14,7 +14,10 @@ interface DataSender
     /**
      * @return $this
      */
-    public function setDataReceiver(DataReceiver $receiver): static;
+    public function setDataReceiver(
+        DataReceiver $receiver
+    ): static;
+
     public function getDataReceiver(): ?DataReceiver;
     public function sendData(): void;
 }

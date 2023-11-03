@@ -18,19 +18,25 @@ interface OutputBroadcaster
      *
      * @return $this
      */
-    public function addOutputReceiver(DataReceiver $receiver): static;
+    public function addOutputReceiver(
+        DataReceiver $receiver
+    ): static;
 
     /**
      * Is receiver registered on input endpoint?
      */
-    public function hasOutputReceiver(DataReceiver $receiver): bool;
+    public function hasOutputReceiver(
+        DataReceiver $receiver
+    ): bool;
 
     /**
      * Remove receiver from output endpoint
      *
      * @return $this
      */
-    public function removeOutputReceiver(DataReceiver $receiver): static;
+    public function removeOutputReceiver(
+        DataReceiver $receiver
+    ): static;
 
     /**
      * Get list of output receivers

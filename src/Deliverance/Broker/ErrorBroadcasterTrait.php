@@ -23,8 +23,9 @@ trait ErrorBroadcasterTrait
      *
      * @return $this
      */
-    public function addErrorReceiver(DataReceiver $receiver): static
-    {
+    public function addErrorReceiver(
+        DataReceiver $receiver
+    ): static {
         $id = spl_object_id($receiver);
         $this->errorReceivers[$id] = $receiver;
 
@@ -34,8 +35,9 @@ trait ErrorBroadcasterTrait
     /**
      * Is receiver registered at error endpoint?
      */
-    public function hasErrorReceiver(DataReceiver $receiver): bool
-    {
+    public function hasErrorReceiver(
+        DataReceiver $receiver
+    ): bool {
         $id = spl_object_id($receiver);
         return isset($this->errorReceivers[$id]);
     }
@@ -45,8 +47,9 @@ trait ErrorBroadcasterTrait
      *
      * @return $this
      */
-    public function removeErrorReceiver(DataReceiver $receiver): static
-    {
+    public function removeErrorReceiver(
+        DataReceiver $receiver
+    ): static {
         $id = spl_object_id($receiver);
         unset($this->errorReceivers[$id]);
         return $this;

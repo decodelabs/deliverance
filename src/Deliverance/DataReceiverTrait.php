@@ -38,8 +38,9 @@ trait DataReceiverTrait
     /**
      * Write a single line of data
      */
-    public function writeLine(?string $data = ''): int
-    {
+    public function writeLine(
+        ?string $data = ''
+    ): int {
         return $this->write($data . PHP_EOL);
     }
 

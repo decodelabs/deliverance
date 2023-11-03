@@ -18,19 +18,25 @@ interface InputCollector
      *
      * @return $this
      */
-    public function addInputProvider(DataProvider $provider): static;
+    public function addInputProvider(
+        DataProvider $provider
+    ): static;
 
     /**
      * Is provider registered on input endpoint?
      */
-    public function hasInputProvider(DataProvider $provider): bool;
+    public function hasInputProvider(
+        DataProvider $provider
+    ): bool;
 
     /**
      * Remove provider from input endpoint
      *
      * @return $this
      */
-    public function removeInputProvider(DataProvider $provider): static;
+    public function removeInputProvider(
+        DataProvider $provider
+    ): static;
 
     /**
      * Get list of input providers

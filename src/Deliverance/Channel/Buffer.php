@@ -26,8 +26,9 @@ class Buffer implements Channel
     /**
      * Init with stream path
      */
-    public function __construct(string $buffer = null)
-    {
+    public function __construct(
+        string $buffer = null
+    ) {
         $this->buffer = (string)$buffer;
     }
 
@@ -43,8 +44,9 @@ class Buffer implements Channel
     /**
      * Set read blocking mode
      */
-    public function setReadBlocking(bool $flag): static
-    {
+    public function setReadBlocking(
+        bool $flag
+    ): static {
         return $this;
     }
 
@@ -59,8 +61,9 @@ class Buffer implements Channel
     /**
      * Set as readable
      */
-    public function setReadable(bool $flag): Channel
-    {
+    public function setReadable(
+        bool $flag
+    ): Channel {
         $this->readable = $flag;
         return $this;
     }
@@ -76,8 +79,9 @@ class Buffer implements Channel
     /**
      * Read up to $length bytes from resource
      */
-    public function read(int $length): ?string
-    {
+    public function read(
+        int $length
+    ): ?string {
         $this->checkReadable();
 
         $output = substr($this->buffer, 0, $length);
@@ -137,8 +141,9 @@ class Buffer implements Channel
      *
      * @return $this
      */
-    public function setWritable(bool $flag): static
-    {
+    public function setWritable(
+        bool $flag
+    ): static {
         $this->writable = $flag;
         return $this;
     }

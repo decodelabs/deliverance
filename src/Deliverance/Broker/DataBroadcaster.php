@@ -20,17 +20,23 @@ interface DataBroadcaster extends
      *
      * @return $this
      */
-    public function addDataReceiver(DataReceiver $receiver): static;
+    public function addDataReceiver(
+        DataReceiver $receiver
+    ): static;
 
     /**
      * Is receiver in any endpoint
      */
-    public function hasDataReceiver(DataReceiver $receiver): bool;
+    public function hasDataReceiver(
+        DataReceiver $receiver
+    ): bool;
 
     /**
      * Remove data receiver from all endpoints
      *
      * @return $this
      */
-    public function removeDataReceiver(DataReceiver $receiver): static;
+    public function removeDataReceiver(
+        DataReceiver $receiver
+    ): static;
 }

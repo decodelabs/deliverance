@@ -19,7 +19,9 @@ interface DataReceiver extends Writable
         int $length = null
     ): int;
 
-    public function writeLine(?string $data = ''): int;
+    public function writeLine(
+        ?string $data = ''
+    ): int;
 
     public function writeBuffer(
         Buffer $buffer,

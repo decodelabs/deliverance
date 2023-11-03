@@ -30,8 +30,9 @@ class Broker implements
      *
      * @return $this
      */
-    public function setInputEnabled(bool $enabled): static
-    {
+    public function setInputEnabled(
+        bool $enabled
+    ): static {
         $this->inputEnabled = $enabled;
         return $this;
     }
@@ -53,8 +54,9 @@ class Broker implements
      *
      * @return $this
      */
-    public function addIoChannel(Channel $channel): static
-    {
+    public function addIoChannel(
+        Channel $channel
+    ): static {
         $id = spl_object_id($channel);
 
         $this->inputCollectors[$id] = $channel;
@@ -68,8 +70,9 @@ class Broker implements
      *
      * @return $this
      */
-    public function addChannel(Channel $channel): static
-    {
+    public function addChannel(
+        Channel $channel
+    ): static {
         $id = spl_object_id($channel);
 
         $this->inputCollectors[$id] = $channel;
@@ -82,8 +85,9 @@ class Broker implements
     /**
      * Is channel in any endpoint
      */
-    public function hasChannel(Channel $channel): bool
-    {
+    public function hasChannel(
+        Channel $channel
+    ): bool {
         $id = spl_object_id($channel);
 
         return
@@ -97,8 +101,9 @@ class Broker implements
      *
      * @return $this
      */
-    public function removeChannel(Channel $channel): static
-    {
+    public function removeChannel(
+        Channel $channel
+    ): static {
         $id = spl_object_id($channel);
         unset($this->inputCollectors[$id]);
         unset($this->outputReceivers[$id]);
@@ -125,8 +130,9 @@ class Broker implements
      *
      * @return $this
      */
-    public function setReadBlocking(bool $flag): static
-    {
+    public function setReadBlocking(
+        bool $flag
+    ): static {
         foreach ($this->inputCollectors as $provider) {
             $provider->setReadBlocking($flag);
         }
@@ -170,8 +176,9 @@ class Broker implements
     /**
      * Read $length from first readable input channel
      */
-    public function read(int $length): ?string
-    {
+    public function read(
+        int $length
+    ): ?string {
         if (!$this->inputEnabled) {
             return null;
         }
@@ -260,8 +267,9 @@ class Broker implements
      *
      * @return $this
      */
-    public function readTo(DataReceiver $writer): static
-    {
+    public function readTo(
+        DataReceiver $writer
+    ): static {
         while (!$this->isAtEnd()) {
             $chunk = $this->read(8192);
 
@@ -322,8 +330,9 @@ class Broker implements
     /**
      * Write line to error channels
      */
-    public function writeLine(?string $data = ''): int
-    {
+    public function writeLine(
+        ?string $data = ''
+    ): int {
         return $this->write($data . PHP_EOL);
     }
 
@@ -381,8 +390,9 @@ class Broker implements
     /**
      * Write line to error channels
      */
-    public function writeErrorLine(?string $data = ''): int
-    {
+    public function writeErrorLine(
+        ?string $data = ''
+    ): int {
         return $this->writeError($data . PHP_EOL);
     }
 
