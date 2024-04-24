@@ -13,9 +13,7 @@
 
         "decodelabs/exceptional": "^0.4",
         "decodelabs/glitch-support": "^0.4",
-        "decodelabs/tightrope": "^0.1.1",
-
-        "psr/http-message": "^2.0"
+        "decodelabs/tightrope": "^0.1.1"
     },
     "require-dev": {
         "decodelabs/phpstan-decodelabs": "^0.6"

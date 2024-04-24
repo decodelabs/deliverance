@@ -1,4 +1,5 @@
 * Made PHP8.1 minimum version
+* Removed psr/http-message dependency
 
 ## v0.2.11 (2023-10-16)
 * Updated HTTP Message dependency
