@@ -136,7 +136,7 @@ class Stream implements Channel
     /**
      * Read up to $length bytes from resource
      *
-     * @param int<0, max> $length
+     * @param int<1, max> $length
      */
     public function read(
         int $length
@@ -161,7 +161,7 @@ class Stream implements Channel
     }
 
     /**
-     * @param int<0, max> $length
+     * @param int<1, max> $length
      */
     protected function fread(
         int $length
