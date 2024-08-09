@@ -53,7 +53,7 @@ class Stream implements Channel
             $this->resource = $stream;
             $this->mode = stream_get_meta_data($this->resource)['mode'];
         } else {
-            if (!$resource = fopen($stream, (string)$mode)) {
+            if (!$resource = fopen((string)$stream, (string)$mode)) {
                 throw Exceptional::Io(
                     'Unable to open stream'
                 );
