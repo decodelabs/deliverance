@@ -11,6 +11,9 @@ namespace DecodeLabs\Deliverance\Broker;
 
 use DecodeLabs\Deliverance\Channel;
 
+/**
+ * @phpstan-require-implements ChannelConnector
+ */
 trait ChannelConnectorTrait
 {
     use InputCollectorTrait;

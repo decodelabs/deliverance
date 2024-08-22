@@ -12,7 +12,6 @@ namespace DecodeLabs\Deliverance\Channel;
 use DecodeLabs\Deliverance\Channel;
 use DecodeLabs\Deliverance\DataProviderTrait;
 use DecodeLabs\Deliverance\DataReceiverTrait;
-
 use DecodeLabs\Exceptional;
 use Throwable;
 

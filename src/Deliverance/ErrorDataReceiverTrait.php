@@ -12,6 +12,9 @@ namespace DecodeLabs\Deliverance;
 use DecodeLabs\Deliverance\Channel\Buffer;
 use DecodeLabs\Exceptional;
 
+/**
+ * @phpstan-require-implements ErrorDataReceiver
+ */
 trait ErrorDataReceiverTrait
 {
     /**

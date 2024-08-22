@@ -11,6 +11,9 @@ namespace DecodeLabs\Deliverance\Broker;
 
 use DecodeLabs\Deliverance\DataReceiver;
 
+/**
+ * @phpstan-require-implements DataBroadcaster
+ */
 trait DataBroadcasterTrait
 {
     use OutputBroadcasterTrait;

@@ -11,6 +11,9 @@ namespace DecodeLabs\Deliverance;
 
 use DecodeLabs\Exceptional;
 
+/**
+ * @phpstan-require-implements DataProvider
+ */
 trait DataProviderTrait
 {
     /**

@@ -11,6 +11,9 @@ namespace DecodeLabs\Deliverance\Broker;
 
 use DecodeLabs\Deliverance\DataProvider;
 
+/**
+ * @phpstan-require-implements InputCollector
+ */
 trait InputCollectorTrait
 {
     /**
