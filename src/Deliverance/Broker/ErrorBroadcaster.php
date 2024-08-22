@@ -18,19 +18,25 @@ interface ErrorBroadcaster
      *
      * @return $this
      */
-    public function addErrorReceiver(DataReceiver $receiver): static;
+    public function addErrorReceiver(
+        DataReceiver $receiver
+    ): static;
 
     /**
      * Is receiver registered at error endpoint?
      */
-    public function hasErrorReceiver(DataReceiver $receiver): bool;
+    public function hasErrorReceiver(
+        DataReceiver $receiver
+    ): bool;
 
     /**
      * Remove receiver from error endpoint
      *
      * @return $this
      */
-    public function removeErrorReceiver(DataReceiver $receiver): static;
+    public function removeErrorReceiver(
+        DataReceiver $receiver
+    ): static;
 
     /**
      * Get list of error receivers

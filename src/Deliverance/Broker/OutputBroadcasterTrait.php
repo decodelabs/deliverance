@@ -11,6 +11,9 @@ namespace DecodeLabs\Deliverance\Broker;
 
 use DecodeLabs\Deliverance\DataReceiver;
 
+/**
+ * @phpstan-require-implements OutputBroadcaster
+ */
 trait OutputBroadcasterTrait
 {
     /**
@@ -23,8 +26,9 @@ trait OutputBroadcasterTrait
      *
      * @return $this
      */
-    public function addOutputReceiver(DataReceiver $receiver): static
-    {
+    public function addOutputReceiver(
+        DataReceiver $receiver
+    ): static {
         $id = spl_object_id($receiver);
         $this->outputReceivers[$id] = $receiver;
 
@@ -34,8 +38,9 @@ trait OutputBroadcasterTrait
     /**
      * Is receiver registered on input endpoint?
      */
-    public function hasOutputReceiver(DataReceiver $receiver): bool
-    {
+    public function hasOutputReceiver(
+        DataReceiver $receiver
+    ): bool {
         $id = spl_object_id($receiver);
         return isset($this->outputReceivers[$id]);
     }
@@ -45,8 +50,9 @@ trait OutputBroadcasterTrait
      *
      * @return $this
      */
-    public function removeOutputReceiver(DataReceiver $receiver): static
-    {
+    public function removeOutputReceiver(
+        DataReceiver $receiver
+    ): static {
         $id = spl_object_id($receiver);
         unset($this->outputReceivers[$id]);
         return $this;

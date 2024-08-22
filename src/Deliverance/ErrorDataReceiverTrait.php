@@ -12,6 +12,9 @@ namespace DecodeLabs\Deliverance;
 use DecodeLabs\Deliverance\Channel\Buffer;
 use DecodeLabs\Exceptional;
 
+/**
+ * @phpstan-require-implements ErrorDataReceiver
+ */
 trait ErrorDataReceiverTrait
 {
     /**
@@ -38,8 +41,9 @@ trait ErrorDataReceiverTrait
     /**
      * Write a single line of data
      */
-    public function writeErrorLine(?string $data = ''): int
-    {
+    public function writeErrorLine(
+        ?string $data = ''
+    ): int {
         return $this->writeError($data . PHP_EOL);
     }
 

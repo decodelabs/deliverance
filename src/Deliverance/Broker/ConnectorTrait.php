@@ -9,6 +9,9 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance\Broker;
 
+/**
+ * @phpstan-require-implements Connector
+ */
 trait ConnectorTrait
 {
     use InputCollectorTrait;

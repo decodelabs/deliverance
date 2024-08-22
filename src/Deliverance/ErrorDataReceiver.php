@@ -20,7 +20,9 @@ interface ErrorDataReceiver
         int $length = null
     ): int;
 
-    public function writeErrorLine(?string $data = ''): int;
+    public function writeErrorLine(
+        ?string $data = ''
+    ): int;
 
     public function writeErrorBuffer(
         Buffer $buffer,

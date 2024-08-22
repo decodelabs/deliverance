@@ -11,6 +11,9 @@ namespace DecodeLabs\Deliverance\Broker;
 
 use DecodeLabs\Deliverance\DataProvider;
 
+/**
+ * @phpstan-require-implements InputCollector
+ */
 trait InputCollectorTrait
 {
     /**
@@ -23,8 +26,9 @@ trait InputCollectorTrait
      *
      * @return $this
      */
-    public function addInputProvider(DataProvider $provider): static
-    {
+    public function addInputProvider(
+        DataProvider $provider
+    ): static {
         $id = spl_object_id($provider);
         $this->inputCollectors[$id] = $provider;
 
@@ -34,8 +38,9 @@ trait InputCollectorTrait
     /**
      * Is provider registered on input endpoint?
      */
-    public function hasInputProvider(DataProvider $provider): bool
-    {
+    public function hasInputProvider(
+        DataProvider $provider
+    ): bool {
         $id = spl_object_id($provider);
         return isset($this->inputCollectors[$id]);
     }
@@ -45,8 +50,9 @@ trait InputCollectorTrait
      *
      * @return $this
      */
-    public function removeInputProvider(DataProvider $provider): static
-    {
+    public function removeInputProvider(
+        DataProvider $provider
+    ): static {
         $id = spl_object_id($provider);
         unset($this->inputCollectors[$id]);
         return $this;

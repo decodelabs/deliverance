@@ -11,6 +11,9 @@ namespace DecodeLabs\Deliverance\Broker;
 
 use DecodeLabs\Deliverance\Channel;
 
+/**
+ * @phpstan-require-implements ChannelConnector
+ */
 trait ChannelConnectorTrait
 {
     use InputCollectorTrait;
@@ -22,8 +25,9 @@ trait ChannelConnectorTrait
      *
      * @return $this
      */
-    public function addIoChannel(Channel $channel): static
-    {
+    public function addIoChannel(
+        Channel $channel
+    ): static {
         $id = spl_object_id($channel);
 
         $this->inputCollectors[$id] = $channel;
@@ -37,8 +41,9 @@ trait ChannelConnectorTrait
      *
      * @return $this
      */
-    public function addChannel(Channel $channel): static
-    {
+    public function addChannel(
+        Channel $channel
+    ): static {
         $id = spl_object_id($channel);
 
         $this->inputCollectors[$id] = $channel;
@@ -51,8 +56,9 @@ trait ChannelConnectorTrait
     /**
      * Is channel in any endpoint
      */
-    public function hasChannel(Channel $channel): bool
-    {
+    public function hasChannel(
+        Channel $channel
+    ): bool {
         $id = spl_object_id($channel);
 
         return
@@ -66,8 +72,9 @@ trait ChannelConnectorTrait
      *
      * @return $this
      */
-    public function removeChannel(Channel $channel): static
-    {
+    public function removeChannel(
+        Channel $channel
+    ): static {
         $id = spl_object_id($channel);
         unset($this->inputCollectors[$id]);
         unset($this->outputReceivers[$id]);
