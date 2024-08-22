@@ -1,3 +1,4 @@
+## v0.2.12 (2024-08-21)
 * Added @phpstan-require-implements constraints
 * Made PHP8.1 minimum version
 * Removed psr/http-message dependency
