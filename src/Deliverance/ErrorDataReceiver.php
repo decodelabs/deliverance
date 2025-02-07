@@ -17,7 +17,7 @@ interface ErrorDataReceiver
 
     public function writeError(
         ?string $data,
-        int $length = null
+        ?int $length = null
     ): int;
 
     public function writeErrorLine(

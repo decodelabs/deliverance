@@ -27,7 +27,7 @@ class Buffer implements Channel
      * Init with stream path
      */
     public function __construct(
-        string $buffer = null
+        ?string $buffer = null
     ) {
         $this->buffer = (string)$buffer;
     }
@@ -163,7 +163,7 @@ class Buffer implements Channel
      */
     public function write(
         ?string $data,
-        int $length = null
+        ?int $length = null
     ): int {
         $this->checkWritable();
 

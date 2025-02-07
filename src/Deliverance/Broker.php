@@ -303,7 +303,7 @@ class Broker implements
      */
     public function write(
         ?string $data,
-        int $length = null
+        ?int $length = null
     ): int {
         if (
             $length === 0 ||
@@ -366,7 +366,7 @@ class Broker implements
      */
     public function writeError(
         ?string $data,
-        int $length = null
+        ?int $length = null
     ): int {
         if ($length === 0 || $data === null) {
             return 0;
