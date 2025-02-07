@@ -1,3 +1,6 @@
+## v0.2.13 (2025-02-07)
+* Fixed implicit nullable arguments
+
 ## v0.2.12 (2024-08-21)
 * Added @phpstan-require-implements constraints
 * Made PHP8.1 minimum version

@@ -16,7 +16,7 @@ interface DataReceiver extends Writable
 {
     public function write(
         ?string $data,
-        int $length = null
+        ?int $length = null
     ): int;
 
     public function writeLine(

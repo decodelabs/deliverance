@@ -61,7 +61,7 @@ class Proxy implements DataReceiver
      */
     public function write(
         ?string $data,
-        int $length = null
+        ?int $length = null
     ): int {
         $this->checkWritable();
 
