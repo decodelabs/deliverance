@@ -289,9 +289,8 @@ class Stream implements Channel
 
         if ($output === false) {
             throw Exceptional::Io(
-                'Unable to write to stream',
-                null,
-                $this
+                message: 'Unable to write to stream',
+                data: $this
             );
         }
 

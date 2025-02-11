@@ -1,4 +1,9 @@
+## v0.2.14 (2025-02-11)
+* Upgraded PHPStan to v2
+* Upgraded dependencies
+* Added test for ErrorDataReceiver
 * Added PHP8.4 to CI workflow
+* Made PHP8.4 minimum version
 
 ## v0.2.13 (2025-02-07)
 * Fixed implicit nullable arguments
