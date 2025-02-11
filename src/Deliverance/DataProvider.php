@@ -9,9 +9,9 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance;
 
-use DecodeLabs\Tightrope\Readable;
+use DecodeLabs\Tightrope\ReadableGet;
 
-interface DataProvider extends Readable
+interface DataProvider extends ReadableGet
 {
     /**
      * @return $this

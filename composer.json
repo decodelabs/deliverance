@@ -9,17 +9,22 @@
             "email": "tom@inflatablecookie.com"
         } ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.4",
 
-        "decodelabs/exceptional": "^0.4",
-        "decodelabs/tightrope": "^0.1.1"
+        "decodelabs/exceptional": "^0.5",
+        "decodelabs/tightrope": "^0.2"
     },
     "require-dev": {
-        "decodelabs/phpstan-decodelabs": "^0.6"
+        "decodelabs/phpstan-decodelabs": "^0.7"
     },
     "autoload": {
         "psr-4": {
             "DecodeLabs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DecodeLabs\\Deliverance\\Tests\\": "tests/"
         }
     },
     "extra": {

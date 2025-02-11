@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance\DataReceiver;
 
+use Closure;
 use DecodeLabs\Deliverance\DataReceiver;
 use DecodeLabs\Deliverance\DataReceiverTrait;
 
@@ -17,11 +18,7 @@ class Proxy implements DataReceiver
     use DataReceiverTrait;
 
     protected object $receiver;
-
-    /**
-     * @var callable
-     */
-    protected $writer;
+    protected Closure $writer;
     protected bool $writable = true;
 
     /**
@@ -32,7 +29,7 @@ class Proxy implements DataReceiver
         callable $writer
     ) {
         $this->receiver = $receiver;
-        $this->writer = $writer;
+        $this->writer = Closure::fromCallable($writer);
     }
 
 
