@@ -32,7 +32,7 @@ trait DataReceiverTrait
     {
         if (!$this->isWritable()) {
             throw Exceptional::Runtime(
-                'Writing has been shut down'
+                message: 'Writing has been shut down'
             );
         }
     }

@@ -54,7 +54,7 @@ class Stream implements Channel
         } else {
             if (!$resource = fopen((string)$stream, (string)$mode)) {
                 throw Exceptional::Io(
-                    'Unable to open stream'
+                    message: 'Unable to open stream'
                 );
             }
 
@@ -88,7 +88,7 @@ class Stream implements Channel
     ): static {
         if ($this->resource === null) {
             throw Exceptional::Logic(
-                'Cannot set blocking, resource not open'
+                message: 'Cannot set blocking, resource not open'
             );
         }
 

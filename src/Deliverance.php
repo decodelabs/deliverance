@@ -39,7 +39,7 @@ class Deliverance
     {
         if (!defined('STDIN')) {
             throw Exceptional::Runtime(
-                'STDIN is only available on the CLI SAPI'
+                message: 'STDIN is only available on the CLI SAPI'
             );
         }
 
@@ -53,7 +53,7 @@ class Deliverance
     {
         if (!defined('STDOUT')) {
             throw Exceptional::Runtime(
-                'STDOUT is only available on the CLI SAPI'
+                message: 'STDOUT is only available on the CLI SAPI'
             );
         }
 
@@ -67,7 +67,7 @@ class Deliverance
     {
         if (!defined('STDERR')) {
             throw Exceptional::Runtime(
-                'STDERR is only available on the CLI SAPI'
+                message: 'STDERR is only available on the CLI SAPI'
             );
         }
 

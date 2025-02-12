@@ -24,7 +24,7 @@ trait DataProviderTrait
     ): static {
         if ($flag) {
             throw Exceptional::Runtime(
-                'DataProvider does not support blocking mode'
+                message: 'DataProvider does not support blocking mode'
             );
         }
 
@@ -55,7 +55,7 @@ trait DataProviderTrait
     {
         if (!$this->isReadable()) {
             throw Exceptional::Runtime(
-                'Reading has been shut down'
+                message: 'Reading has been shut down'
             );
         }
     }

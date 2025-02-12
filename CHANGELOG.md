@@ -1,3 +1,5 @@
+* Improved Exception syntax
+
 ## v0.2.14 (2025-02-11)
 * Upgraded PHPStan to v2
 * Upgraded dependencies
