@@ -44,7 +44,10 @@ class Stream implements Channel
 
         $isResource = is_resource($stream);
 
-        if ($mode === null && !$isResource) {
+        if (
+            $mode === null &&
+            !$isResource
+        ) {
             return;
         }
 
@@ -152,7 +155,10 @@ class Stream implements Channel
             return null;
         }
 
-        if ($output === '' || $output === false) {
+        if (
+            $output === '' ||
+            $output === false
+        ) {
             $output = null;
         }
 
@@ -189,7 +195,10 @@ class Stream implements Channel
             return null;
         }
 
-        if ($output === '' || $output === false) {
+        if (
+            $output === '' ||
+            $output === false
+        ) {
             $output = null;
         }
 
@@ -222,7 +231,10 @@ class Stream implements Channel
             return null;
         }
 
-        if ($output === '' || $output === false) {
+        if (
+            $output === '' ||
+            $output === false
+        ) {
             $output = null;
         } else {
             $output = rtrim($output, "\r\n");

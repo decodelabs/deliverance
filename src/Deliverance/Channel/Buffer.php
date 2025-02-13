@@ -73,7 +73,9 @@ class Buffer implements Channel
      */
     public function isReadable(): bool
     {
-        return $this->open && $this->readable;
+        return
+            $this->open &&
+            $this->readable;
     }
 
     /**

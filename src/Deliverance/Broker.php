@@ -368,7 +368,10 @@ class Broker implements
         ?string $data,
         ?int $length = null
     ): int {
-        if ($length === 0 || $data === null) {
+        if (
+            $length === 0 ||
+            $data === null
+        ) {
             return 0;
         } elseif ($length === null) {
             $length = strlen($data);
