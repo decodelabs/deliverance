@@ -11,8 +11,6 @@
 
 Deliverance is a middleware library intended to be used by other framework systems that need to manage multiplex IO operations.
 
-_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
-
 ---
 
 ## Installation
