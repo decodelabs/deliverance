@@ -17,13 +17,11 @@ use DecodeLabs\Deliverance\DataReceiver;
 trait ErrorBroadcasterTrait
 {
     /**
-     * @var array<int, DataReceiver>
+     * @var array<int,DataReceiver>
      */
-    protected array $errorReceivers = [];
+    protected(set) array $errorReceivers = [];
 
     /**
-     * Add receiver on error endpoint
-     *
      * @return $this
      */
     public function addErrorReceiver(
@@ -35,9 +33,6 @@ trait ErrorBroadcasterTrait
         return $this;
     }
 
-    /**
-     * Is receiver registered at error endpoint?
-     */
     public function hasErrorReceiver(
         DataReceiver $receiver
     ): bool {
@@ -46,8 +41,6 @@ trait ErrorBroadcasterTrait
     }
 
     /**
-     * Remove receiver from error endpoint
-     *
      * @return $this
      */
     public function removeErrorReceiver(
@@ -58,19 +51,6 @@ trait ErrorBroadcasterTrait
         return $this;
     }
 
-    /**
-     * Get list of error receivers
-     *
-     * @return array<int, DataReceiver>
-     */
-    public function getErrorReceivers(): array
-    {
-        return $this->errorReceivers;
-    }
-
-    /**
-     * Get first error receiver
-     */
     public function getFirstErrorReceiver(): ?DataReceiver
     {
         foreach ($this->errorReceivers as $receiver) {

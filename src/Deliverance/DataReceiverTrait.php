@@ -17,17 +17,11 @@ use DecodeLabs\Exceptional;
  */
 trait DataReceiverTrait
 {
-    /**
-     * Is the resource still writable?
-     */
     public function isWritable(): bool
     {
         return true;
     }
 
-    /**
-     * Check the resource is readable and throw exception if not
-     */
     protected function checkWritable(): void
     {
         if (!$this->isWritable()) {
@@ -38,9 +32,6 @@ trait DataReceiverTrait
     }
 
 
-    /**
-     * Write a single line of data
-     */
     public function writeLine(
         ?string $data = ''
     ): int {
@@ -48,9 +39,7 @@ trait DataReceiverTrait
     }
 
     /**
-     * Pluck and write $length bytes from buffer
-     *
-     * @param int<0, max> $length
+     * @param int<0,max> $length
      */
     public function writeBuffer(
         Buffer $buffer,

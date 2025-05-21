@@ -17,13 +17,11 @@ use DecodeLabs\Deliverance\DataReceiver;
 trait OutputBroadcasterTrait
 {
     /**
-     * @var array<int, DataReceiver>
+     * @var array<int,DataReceiver>
      */
-    protected array $outputReceivers = [];
+    protected(set) array $outputReceivers = [];
 
     /**
-     * Add receiver on output endpoint
-     *
      * @return $this
      */
     public function addOutputReceiver(
@@ -35,9 +33,6 @@ trait OutputBroadcasterTrait
         return $this;
     }
 
-    /**
-     * Is receiver registered on input endpoint?
-     */
     public function hasOutputReceiver(
         DataReceiver $receiver
     ): bool {
@@ -46,8 +41,6 @@ trait OutputBroadcasterTrait
     }
 
     /**
-     * Remove receiver from output endpoint
-     *
      * @return $this
      */
     public function removeOutputReceiver(
@@ -58,19 +51,6 @@ trait OutputBroadcasterTrait
         return $this;
     }
 
-    /**
-     * Get list of output receivers
-     *
-     * @return array<int, DataReceiver>
-     */
-    public function getOutputReceivers(): array
-    {
-        return $this->outputReceivers;
-    }
-
-    /**
-     * Get first output receiver
-     */
     public function getFirstOutputReceiver(): ?DataReceiver
     {
         foreach ($this->outputReceivers as $receiver) {

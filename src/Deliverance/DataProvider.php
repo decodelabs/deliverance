@@ -13,14 +13,7 @@ use DecodeLabs\Tightrope\ReadableGet;
 
 interface DataProvider extends ReadableGet
 {
-    /**
-     * @return $this
-     */
-    public function setReadBlocking(
-        bool $flag
-    ): static;
-
-    public function isReadBlocking(): bool;
+    public bool $readBlocking { get; set; }
 
     public function read(
         int $length

@@ -14,6 +14,7 @@ namespace DecodeLabs\Deliverance;
  */
 interface Socket extends Channel
 {
-    public function getId(): string;
+    public string $id { get; }
+
     public function isStreamBased(): bool;
 }

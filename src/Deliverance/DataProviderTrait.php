@@ -16,41 +16,11 @@ use DecodeLabs\Exceptional;
  */
 trait DataProviderTrait
 {
-    /**
-     * Set read blocking mode
-     */
-    public function setReadBlocking(
-        bool $flag
-    ): static {
-        if ($flag) {
-            throw Exceptional::Runtime(
-                message: 'DataProvider does not support blocking mode'
-            );
-        }
-
-        return $this;
-    }
-
-    /**
-     * Is this channel in blocking mode?
-     */
-    public function isReadBlocking(): bool
-    {
-        return true;
-    }
-
-
-    /**
-     * Is the resource still accessible?
-     */
     public function isReadable(): bool
     {
         return true;
     }
 
-    /**
-     * Check the resource is readable and throw exception if not
-     */
     protected function checkReadable(): void
     {
         if (!$this->isReadable()) {
@@ -62,9 +32,6 @@ trait DataProviderTrait
 
 
 
-    /**
-     * Read all available data from resource
-     */
     public function readAll(): ?string
     {
         $this->checkReadable();
@@ -83,9 +50,6 @@ trait DataProviderTrait
         return $data;
     }
 
-    /**
-     * Transfer available data to a write instance
-     */
     public function readTo(
         DataReceiver $writer
     ): static {

@@ -17,12 +17,10 @@ use DecodeLabs\Deliverance\Channel\Stream;
 class Deliverance
 {
     /**
-     * Open a stream Channel
-     *
      * @param Channel|string|resource $stream
      */
     public static function openStream(
-        $stream,
+        mixed $stream,
         string $mode = 'a+'
     ): Channel {
         if ($stream instanceof Channel) {
@@ -32,9 +30,6 @@ class Deliverance
         return new Stream($stream, $mode);
     }
 
-    /**
-     * Open a STDIN Channel
-     */
     public static function openCliInputStream(): Stream
     {
         if (!defined('STDIN')) {
@@ -46,9 +41,6 @@ class Deliverance
         return new Stream(\STDIN, 'r');
     }
 
-    /**
-     * Open a STDOUT Channel
-     */
     public static function openCliOutputStream(): Stream
     {
         if (!defined('STDOUT')) {
@@ -60,9 +52,6 @@ class Deliverance
         return new Stream(\STDOUT, 'w');
     }
 
-    /**
-     * Open a STDERR Channel
-     */
     public static function openCliErrorStream(): Stream
     {
         if (!defined('STDERR')) {
@@ -75,17 +64,11 @@ class Deliverance
     }
 
 
-    /**
-     * Open HTTP input Channel
-     */
     public static function openHttpInputStream(): Stream
     {
         return new Stream('php://input', 'r');
     }
 
-    /**
-     * Open HTTP output Channel
-     */
     public static function openHttpOutputStream(): Stream
     {
         return new Stream('php://output', 'w');
@@ -93,9 +76,6 @@ class Deliverance
 
 
 
-    /**
-     * Create a new buffer Channel
-     */
     public static function newBuffer(
         ?string $buffer = null
     ): Buffer {
@@ -103,17 +83,11 @@ class Deliverance
     }
 
 
-    /**
-     * New IO Broker
-     */
     public static function newBroker(): Broker
     {
         return new Broker();
     }
 
-    /**
-     * Create STD IO Broker
-     */
     public static function newCliBroker(): Broker
     {
         return static::newBroker()
@@ -122,9 +96,6 @@ class Deliverance
             ->addErrorReceiver(static::openCliErrorStream());
     }
 
-    /**
-     * Create HTTP IO Broker
-     */
     public static function newHttpBroker(): Broker
     {
         return static::newBroker()

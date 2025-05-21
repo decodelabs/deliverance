@@ -17,33 +17,20 @@ interface ChannelConnector extends
     ErrorBroadcaster
 {
     /**
-     * Add channel to input and output endpoints
-     *
-     * @return $this
-     */
-    public function addIoChannel(
-        Channel $channel
-    ): static;
-
-    /**
-     * Add channel to all endpoints
-     *
      * @return $this
      */
     public function addChannel(
-        Channel $channel
+        Channel $channel,
+        bool $input = true,
+        bool $output = true,
+        bool $error = true
     ): static;
 
-    /**
-     * Is channel in any endpoint
-     */
     public function hasChannel(
         Channel $channel
     ): bool;
 
     /**
-     * Remove channel from all endpoints
-     *
      * @return $this
      */
     public function removeChannel(

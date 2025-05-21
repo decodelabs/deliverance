@@ -14,9 +14,9 @@ interface Channel extends
     DataReceiver
 {
     /**
-     * @return resource|object|null
+     * @var resource|object|null
      */
-    public function getResource();
+    public mixed $ioResource { get; }
 
     /**
      * @return $this

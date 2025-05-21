@@ -59,7 +59,7 @@ $broker = Deliverance::newCliBroker();
 
 
 // Read line from CLI
-$broker->setReadBlocking(true);
+$broker->readBlocking = true;
 $text = $broker->readLine();
 
 // Write it back to output

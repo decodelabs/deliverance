@@ -16,24 +16,19 @@ interface DataBroadcaster extends
     ErrorBroadcaster
 {
     /**
-     * Add data receiver for both output and error endpoints
-     *
      * @return $this
      */
     public function addDataReceiver(
-        DataReceiver $receiver
+        DataReceiver $receiver,
+        bool $input = true,
+        bool $output = true,
     ): static;
 
-    /**
-     * Is receiver in any endpoint
-     */
     public function hasDataReceiver(
         DataReceiver $receiver
     ): bool;
 
     /**
-     * Remove data receiver from all endpoints
-     *
      * @return $this
      */
     public function removeDataReceiver(

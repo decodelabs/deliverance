@@ -23,15 +23,31 @@ class Stream implements Channel
     /**
      * @var resource|null
      */
-    protected $resource;
+    protected(set) mixed $ioResource;
+
+    public bool $readBlocking {
+        get {
+            if ($this->ioResource === null) {
+                return false;
+            }
+
+            $meta = stream_get_meta_data($this->ioResource);
+            return (bool)$meta['blocked'];
+        }
+        set {
+            if ($this->ioResource === null) {
+                return;
+            }
+
+            stream_set_blocking($this->ioResource, $value);
+        }
+    }
 
     protected ?string $mode = null;
     protected ?bool $readable = null;
     protected ?bool $writable = null;
 
     /**
-     * Init with stream path
-     *
      * @param string|resource $stream
      */
     public function __construct(
@@ -52,72 +68,29 @@ class Stream implements Channel
         }
 
         if ($isResource) {
-            $this->resource = $stream;
-            $this->mode = stream_get_meta_data($this->resource)['mode'];
+            $this->ioResource = $stream;
+            $this->mode = stream_get_meta_data($this->ioResource)['mode'];
         } else {
-            if (!$resource = fopen((string)$stream, (string)$mode)) {
+            if (!$ioResource = fopen((string)$stream, (string)$mode)) {
                 throw Exceptional::Io(
                     message: 'Unable to open stream'
                 );
             }
 
-            $this->resource = $resource;
+            $this->ioResource = $ioResource;
             $this->mode = $mode;
         }
     }
 
 
-    /**
-     * Get resource
-     */
-    public function getResource()
-    {
-        return $this->resource;
-    }
-
-    /**
-     * Get mode stream was opened with
-     */
     public function getIoMode(): ?string
     {
         return $this->mode;
     }
 
-    /**
-     * Set read blocking mode
-     */
-    public function setReadBlocking(
-        bool $flag
-    ): static {
-        if ($this->resource === null) {
-            throw Exceptional::Logic(
-                message: 'Cannot set blocking, resource not open'
-            );
-        }
-
-        stream_set_blocking($this->resource, $flag);
-        return $this;
-    }
-
-    /**
-     * Is this channel in blocking mode?
-     */
-    public function isReadBlocking(): bool
-    {
-        if ($this->resource === null) {
-            return false;
-        }
-
-        $meta = stream_get_meta_data($this->resource);
-        return (bool)$meta['blocked'];
-    }
-
-    /**
-     * Is the resource still accessible?
-     */
     public function isReadable(): bool
     {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return false;
         }
 
@@ -136,16 +109,14 @@ class Stream implements Channel
     }
 
     /**
-     * Read up to $length bytes from resource
-     *
-     * @param int<1, max> $length
+     * @param int<1,max> $length
      */
     public function read(
         int $length
     ): ?string {
         $this->checkReadable();
 
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return null;
         }
 
@@ -166,26 +137,23 @@ class Stream implements Channel
     }
 
     /**
-     * @param int<1, max> $length
+     * @param int<1,max> $length
      */
     protected function fread(
         int $length
     ): string|false {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return false;
         }
 
-        return fread($this->resource, $length);
+        return fread($this->ioResource, $length);
     }
 
-    /**
-     * Read single cgar from resource
-     */
     public function readChar(): ?string
     {
         $this->checkReadable();
 
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return null;
         }
 
@@ -207,21 +175,18 @@ class Stream implements Channel
 
     protected function fgetc(): string|false
     {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return false;
         }
 
-        return fgetc($this->resource);
+        return fgetc($this->ioResource);
     }
 
-    /**
-     * Read single line from resource
-     */
     public function readLine(): ?string
     {
         $this->checkReadable();
 
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return null;
         }
 
@@ -244,24 +209,21 @@ class Stream implements Channel
     }
 
     /**
-     * @param int<0, max>|null $length
+     * @param int<0,max>|null $length
      */
     protected function fgets(
         ?int $length = null
     ): string|false {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return false;
         }
 
-        return fgets($this->resource, $length);
+        return fgets($this->ioResource, $length);
     }
 
-    /**
-     * Is the resource still writable?
-     */
     public function isWritable(): bool
     {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return false;
         }
 
@@ -283,9 +245,7 @@ class Stream implements Channel
     }
 
     /**
-     * Write ?$length bytes to resource
-     *
-     * @param int<0, max>|null $length
+     * @param int<0,max>|null $length
      */
     public function write(
         ?string $data,
@@ -293,7 +253,7 @@ class Stream implements Channel
     ): int {
         $this->checkWritable();
 
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return 0;
         }
 
@@ -310,25 +270,22 @@ class Stream implements Channel
     }
 
     /**
-     * @param int<0, max>|null $length
+     * @param int<0,max>|null $length
      */
     protected function fwrite(
         string $data,
         ?int $length = null
     ): int|false {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return false;
         }
 
-        return fwrite($this->resource, $data, $length);
+        return fwrite($this->ioResource, $data, $length);
     }
 
-    /**
-     * Has this stream ended?
-     */
     public function isAtEnd(): bool
     {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return true;
         }
 
@@ -337,26 +294,23 @@ class Stream implements Channel
 
     protected function feof(): bool
     {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return true;
         }
 
-        return feof($this->resource);
+        return feof($this->ioResource);
     }
 
-    /**
-     * Close the stream
-     */
     public function close(): static
     {
-        if ($this->resource !== null) {
+        if ($this->ioResource !== null) {
             try {
                 $this->fclose();
             } catch (Throwable $e) {
             }
         }
 
-        $this->resource = null;
+        $this->ioResource = null;
         $this->mode = null;
         $this->readable = null;
         $this->writable = null;
@@ -366,10 +320,10 @@ class Stream implements Channel
 
     protected function fclose(): bool
     {
-        if ($this->resource === null) {
+        if ($this->ioResource === null) {
             return false;
         }
 
-        return fclose($this->resource);
+        return fclose($this->ioResource);
     }
 }

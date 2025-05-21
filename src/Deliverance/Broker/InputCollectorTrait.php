@@ -17,63 +17,43 @@ use DecodeLabs\Deliverance\DataProvider;
 trait InputCollectorTrait
 {
     /**
-    * @var array<int, DataProvider>
+    * @var array<int,DataProvider>
     */
-    protected array $inputCollectors = [];
+    protected(set) array $inputProviders = [];
 
     /**
-     * Add provider on input endpoint
-     *
      * @return $this
      */
     public function addInputProvider(
         DataProvider $provider
     ): static {
         $id = spl_object_id($provider);
-        $this->inputCollectors[$id] = $provider;
+        $this->inputProviders[$id] = $provider;
 
         return $this;
     }
 
-    /**
-     * Is provider registered on input endpoint?
-     */
     public function hasInputProvider(
         DataProvider $provider
     ): bool {
         $id = spl_object_id($provider);
-        return isset($this->inputCollectors[$id]);
+        return isset($this->inputProviders[$id]);
     }
 
     /**
-     * Remove provider from input endpoint
-     *
      * @return $this
      */
     public function removeInputProvider(
         DataProvider $provider
     ): static {
         $id = spl_object_id($provider);
-        unset($this->inputCollectors[$id]);
+        unset($this->inputProviders[$id]);
         return $this;
     }
 
-    /**
-     * Get list of input providers
-     *
-     * @return array<int, DataProvider>
-     */
-    public function getInputProviders(): array
-    {
-        return $this->inputCollectors;
-    }
-
-    /**
-     * Get first input provider
-     */
     public function getFirstInputProvider(): ?DataProvider
     {
-        foreach ($this->inputCollectors as $provider) {
+        foreach ($this->inputProviders as $provider) {
             return $provider;
         }
 

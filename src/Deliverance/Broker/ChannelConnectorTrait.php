@@ -20,35 +20,29 @@ trait ChannelConnectorTrait
     use OutputBroadcasterTrait;
     use ErrorBroadcasterTrait;
 
-    /**
-     * Add channel to input and output endpoints
-     *
-     * @return $this
-     */
-    public function addIoChannel(
-        Channel $channel
-    ): static {
-        $id = spl_object_id($channel);
-
-        $this->inputCollectors[$id] = $channel;
-        $this->outputReceivers[$id] = $channel;
-
-        return $this;
-    }
 
     /**
-     * Add channel to all endpoints
-     *
      * @return $this
      */
     public function addChannel(
-        Channel $channel
+        Channel $channel,
+        bool $input = true,
+        bool $output = true,
+        bool $error = true
     ): static {
         $id = spl_object_id($channel);
 
-        $this->inputCollectors[$id] = $channel;
-        $this->outputReceivers[$id] = $channel;
-        $this->errorReceivers[$id] = $channel;
+        if($input) {
+            $this->inputProviders[$id] = $channel;
+        }
+
+        if($output) {
+            $this->outputReceivers[$id] = $channel;
+        }
+
+        if($error) {
+            $this->errorReceivers[$id] = $channel;
+        }
 
         return $this;
     }
@@ -62,7 +56,7 @@ trait ChannelConnectorTrait
         $id = spl_object_id($channel);
 
         return
-            isset($this->inputCollectors[$id]) ||
+            isset($this->inputProviders[$id]) ||
             isset($this->outputReceivers[$id]) ||
             isset($this->errorReceivers[$id]);
     }
@@ -76,7 +70,7 @@ trait ChannelConnectorTrait
         Channel $channel
     ): static {
         $id = spl_object_id($channel);
-        unset($this->inputCollectors[$id]);
+        unset($this->inputProviders[$id]);
         unset($this->outputReceivers[$id]);
         unset($this->errorReceivers[$id]);
         return $this;

@@ -20,24 +20,26 @@ trait DataBroadcasterTrait
     use ErrorBroadcasterTrait;
 
     /**
-     * Add data receiver for both output and error endpoints
-     *
      * @return $this
      */
     public function addDataReceiver(
-        DataReceiver $receiver
+        DataReceiver $receiver,
+        bool $input = true,
+        bool $output = true,
     ): static {
         $id = spl_object_id($receiver);
 
-        $this->outputReceivers[$id] = $receiver;
-        $this->errorReceivers[$id] = $receiver;
+        if($input) {
+            $this->outputReceivers[$id] = $receiver;
+        }
+
+        if($output) {
+            $this->errorReceivers[$id] = $receiver;
+        }
 
         return $this;
     }
 
-    /**
-     * Is receiver in any endpoint
-     */
     public function hasDataReceiver(
         DataReceiver $receiver
     ): bool {
@@ -49,8 +51,6 @@ trait DataBroadcasterTrait
     }
 
     /**
-     * Remove data receiver from all endpoints
-     *
      * @return $this
      */
     public function removeDataReceiver(

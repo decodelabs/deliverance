@@ -19,11 +19,9 @@ class Proxy implements DataReceiver
 
     protected object $receiver;
     protected Closure $writer;
-    protected bool $writable = true;
 
-    /**
-     * Init with stream path
-     */
+    public bool $writable = true;
+
     public function __construct(
         object $receiver,
         callable $writer
@@ -33,29 +31,11 @@ class Proxy implements DataReceiver
     }
 
 
-    /**
-     * Set as writable
-     *
-     * @return $this
-     */
-    public function setWritable(
-        bool $flag
-    ): static {
-        $this->writable = $flag;
-        return $this;
-    }
-
-    /**
-     * Is the resource still writable?
-     */
     public function isWritable(): bool
     {
         return $this->writable;
     }
 
-    /**
-     * Write ?$length bytes to resource
-     */
     public function write(
         ?string $data,
         ?int $length = null
