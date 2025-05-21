@@ -14,6 +14,9 @@ use DecodeLabs\Deliverance\DataProviderTrait;
 use DecodeLabs\Deliverance\DataReceiverTrait;
 use DecodeLabs\Deliverance\NoReadBlockingTrait;
 
+/**
+ * @implements Channel<null>
+ */
 class Buffer implements Channel
 {
     use DataProviderTrait;

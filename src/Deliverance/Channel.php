@@ -9,12 +9,15 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance;
 
+/**
+ * @template T of resource|object|null = resource|object|null
+ */
 interface Channel extends
     DataProvider,
     DataReceiver
 {
     /**
-     * @var resource|object|null
+     * @var ?T
      */
     public mixed $ioResource { get; }
 

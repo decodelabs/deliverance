@@ -15,6 +15,9 @@ use DecodeLabs\Deliverance\DataReceiverTrait;
 use DecodeLabs\Exceptional;
 use Throwable;
 
+/**
+ * @implements Channel<resource>
+ */
 class Stream implements Channel
 {
     use DataProviderTrait;
@@ -23,7 +26,7 @@ class Stream implements Channel
     /**
      * @var resource|null
      */
-    protected(set) mixed $ioResource;
+    protected(set) mixed $ioResource = null;
 
     public bool $readBlocking {
         get {
@@ -43,7 +46,7 @@ class Stream implements Channel
         }
     }
 
-    protected ?string $mode = null;
+    protected(set) ?string $ioMode = null;
     protected ?bool $readable = null;
     protected ?bool $writable = null;
 
@@ -69,7 +72,7 @@ class Stream implements Channel
 
         if ($isResource) {
             $this->ioResource = $stream;
-            $this->mode = stream_get_meta_data($this->ioResource)['mode'];
+            $this->ioMode = stream_get_meta_data($this->ioResource)['mode'];
         } else {
             if (!$ioResource = fopen((string)$stream, (string)$mode)) {
                 throw Exceptional::Io(
@@ -78,14 +81,8 @@ class Stream implements Channel
             }
 
             $this->ioResource = $ioResource;
-            $this->mode = $mode;
+            $this->ioMode = $mode;
         }
-    }
-
-
-    public function getIoMode(): ?string
-    {
-        return $this->mode;
     }
 
     public function isReadable(): bool
@@ -95,13 +92,13 @@ class Stream implements Channel
         }
 
         if ($this->readable === null) {
-            if ($this->mode === null) {
+            if ($this->ioMode === null) {
                 return false;
             }
 
             $this->readable = (
-                strstr($this->mode, 'r') ||
-                strstr($this->mode, '+')
+                strstr($this->ioMode, 'r') ||
+                strstr($this->ioMode, '+')
             );
         }
 
@@ -228,16 +225,16 @@ class Stream implements Channel
         }
 
         if ($this->writable === null) {
-            if ($this->mode === null) {
+            if ($this->ioMode === null) {
                 return false;
             }
 
             $this->writable = (
-                strstr($this->mode, 'x') ||
-                strstr($this->mode, 'w') ||
-                strstr($this->mode, 'c') ||
-                strstr($this->mode, 'a') ||
-                strstr($this->mode, '+')
+                strstr($this->ioMode, 'x') ||
+                strstr($this->ioMode, 'w') ||
+                strstr($this->ioMode, 'c') ||
+                strstr($this->ioMode, 'a') ||
+                strstr($this->ioMode, '+')
             );
         }
 
@@ -311,7 +308,7 @@ class Stream implements Channel
         }
 
         $this->ioResource = null;
-        $this->mode = null;
+        $this->ioMode = null;
         $this->readable = null;
         $this->writable = null;
 
