@@ -11,8 +11,7 @@
     "require": {
         "php": "^8.4",
 
-        "decodelabs/exceptional": "^0.5.2",
-        "decodelabs/tightrope": "^0.2"
+        "decodelabs/exceptional": "^0.5.2"
     },
     "require-dev": {
         "decodelabs/phpstan-decodelabs": "^0.7"

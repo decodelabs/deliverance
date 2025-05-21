@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Deliverance;
 
-use DecodeLabs\Tightrope\ReadableGet;
-
-interface DataProvider extends ReadableGet
+interface DataProvider
 {
     public bool $readBlocking { get; set; }
+
+    public function isReadable(): bool;
 
     public function read(
         int $length
