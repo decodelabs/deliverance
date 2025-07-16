@@ -26,7 +26,7 @@ class Stream implements Channel
     /**
      * @var resource|null
      */
-    protected(set) mixed $ioResource = null;
+    public protected(set) mixed $ioResource = null;
 
     public bool $readBlocking {
         get {
@@ -46,7 +46,7 @@ class Stream implements Channel
         }
     }
 
-    protected(set) ?string $ioMode = null;
+    public protected(set) ?string $ioMode = null;
     protected ?bool $readable = null;
     protected ?bool $writable = null;
 

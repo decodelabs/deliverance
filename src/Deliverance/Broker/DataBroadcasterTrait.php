@@ -29,11 +29,11 @@ trait DataBroadcasterTrait
     ): static {
         $id = spl_object_id($receiver);
 
-        if($input) {
+        if ($input) {
             $this->outputReceivers[$id] = $receiver;
         }
 
-        if($output) {
+        if ($output) {
             $this->errorReceivers[$id] = $receiver;
         }
 

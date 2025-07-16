@@ -32,15 +32,15 @@ trait ChannelConnectorTrait
     ): static {
         $id = spl_object_id($channel);
 
-        if($input) {
+        if ($input) {
             $this->inputProviders[$id] = $channel;
         }
 
-        if($output) {
+        if ($output) {
             $this->outputReceivers[$id] = $channel;
         }
 
-        if($error) {
+        if ($error) {
             $this->errorReceivers[$id] = $channel;
         }
 

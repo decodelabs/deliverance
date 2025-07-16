@@ -19,7 +19,7 @@ trait InputCollectorTrait
     /**
     * @var array<int,DataProvider>
     */
-    protected(set) array $inputProviders = [];
+    public protected(set) array $inputProviders = [];
 
     /**
      * @return $this

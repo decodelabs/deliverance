@@ -19,7 +19,7 @@ trait ErrorBroadcasterTrait
     /**
      * @var array<int,DataReceiver>
      */
-    protected(set) array $errorReceivers = [];
+    public protected(set) array $errorReceivers = [];
 
     /**
      * @return $this

@@ -19,7 +19,7 @@ trait OutputBroadcasterTrait
     /**
      * @var array<int,DataReceiver>
      */
-    protected(set) array $outputReceivers = [];
+    public protected(set) array $outputReceivers = [];
 
     /**
      * @return $this

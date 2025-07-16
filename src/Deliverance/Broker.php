@@ -20,7 +20,7 @@ class Broker implements
 {
     use ConnectorTrait;
 
-    protected(set) mixed $ioResource = null;
+    public protected(set) mixed $ioResource = null;
     public bool $inputEnabled = true;
 
     public bool $readBlocking {
