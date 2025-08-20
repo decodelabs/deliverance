@@ -47,9 +47,6 @@ trait ChannelConnectorTrait
         return $this;
     }
 
-    /**
-     * Is channel in any endpoint
-     */
     public function hasChannel(
         Channel $channel
     ): bool {
@@ -62,8 +59,6 @@ trait ChannelConnectorTrait
     }
 
     /**
-     * Remove channel from all endpoints
-     *
      * @return $this
      */
     public function removeChannel(
