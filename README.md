@@ -15,6 +15,8 @@ Deliverance is a middleware library intended to be used by other framework syste
 
 ## Installation
 
+This package requires PHP 8.4 or higher.
+
 Install via Composer:
 
 ```bash
