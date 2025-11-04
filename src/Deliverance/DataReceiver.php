@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package Deliverance
- * @license http://opensource.org/licenses/MIT
+ * Deliverance
+ * @license https://opensource.org/licenses/MIT
  */
 
 declare(strict_types=1);
